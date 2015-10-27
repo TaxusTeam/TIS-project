@@ -1,3 +1,5 @@
 ### Návrh
 
 ___Popis:___ Návrh vychádza z predchádzajúcich už odovzdaných dokumentov. Mal by obsahovať rozdelenie na komponenty a ich podrobný objektový návrh - triedne a objektové diagramy, sekvenčné diagramy, prípadne návrhové vzory, ak sú nejaké využité. Vítaný je aj Data Flow Diagram. Odovzdaný dokument by mal obsahovať kompletný návrh vrátane posledných dvoch analýz, ktoré ste odovzdávali. Môžete ich aktualizovať tak, ako potrebujete, tak, aby výsledný návrh bol konzistentný. Návrh by mal obsahovať vysvetlenie k uvedeným diagramom a byť podľa možnosti kompletný, to znamená, že ak by podľa vášho návrhu mala postupovať iná skupina programátorov, tak by došli z hľadiska funkcionality a vlastností softvéru k rovnakému riešeniu ako vy, bez toho, aby potrebovali s vami o návrhu znova komunikovať. 
+
+http://dai.fmph.uniba.sk/courses/tvorbaIS/kalendar/navrh.html
