@@ -1,0 +1,6 @@
+Zoznam pretekárov s rovnakými chipmi
+
+Meno Priezvisko Osobne cislo Chip Poznamka
+Zoznam pretekárov s rozdielnymi chipmi
+
+Meno Priezvisko Osobne cislo Chip Poznamka
