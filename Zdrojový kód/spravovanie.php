@@ -17,20 +17,12 @@ hlavicka("Spravovanie výkonu");
         <!-- <span>Please fill all the texts in the fields.</span> -->
     </h1> 
     <label>
-        <span>Spravovať výkon súťažiaceho:</span><select name="selection">
-        
-        <!-- SEM PRIDAT FUNKCIU NA NACITANIE SUTAZIACICH Z DB -->
-        <?php
-        show_option_values(["prvá možnosť","druhá možnosť"]);
-        ?>
-        
-        
-        
-        </select>
-    </label>    
+        <span>Meno:</span>
+        <input id="name" type="text" name="name" placeholder="Your Full Name" />
+    </label>   
     <label>
         <span>&nbsp;</span> 
-        <input type="button" class="button" value="Spravuj" /> 
+        <input type="button" class="button" value="Ulož" /> 
     </label>    
 </form>
 
