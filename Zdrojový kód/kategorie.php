@@ -146,7 +146,7 @@ if ($zobraz_form) {
 </div>
 <?php } ?>
   </section>
-  
+  <br><br>
     
   <script src="js/jquery.js"></script>
   <script src="js/jquery.datetimepicker.js"></script>

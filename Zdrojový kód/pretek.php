@@ -265,6 +265,7 @@ if($navodik){
    
   <?php } else{echo "<p>Prihlasovanie na tento pretek bolo uzatvorene</p>";} ?>
 </div>
+<br><br>
 
 
 </form>   

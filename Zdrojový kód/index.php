@@ -129,6 +129,7 @@ if ($zobraz_form) {
       <?php PRETEKY::vypis_zoznam();?>       
     </table> 
 </div>
+<br><br>
 <?php
 }
 paticka();        

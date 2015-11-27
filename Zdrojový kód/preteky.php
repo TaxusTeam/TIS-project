@@ -152,12 +152,13 @@ public function vypis_prihlasenych_d_chip(){
       CHIP              TEXT,
       POZNAMKA          TEXT,
       USPECH            TEXT,
-      KAT               TEXT
+      KAT               TEXT,
+      ID_ODDIEL         INTEGER
       );
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, KAT) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
+          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, KAT, ID_ODDIEL) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
@@ -206,12 +207,13 @@ public function vypis_prihlasenych_u_chip(){
       CHIP              TEXT,
       POZNAMKA          TEXT,
       USPECH            TEXT,
-      KAT               TEXT
+      KAT               TEXT,
+      ID_ODDIEL         INTEGER
       );
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, KAT) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER
+          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, KAT, ID_ODDIEL) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER
            JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
 EOF;
 $db->exec($sql);
@@ -258,12 +260,13 @@ public function vypis_neprihlasenych(){
       OS_I_C            TEXT,
       CHIP              TEXT,
       POZNAMKA          TEXT,
-      USPECH            TEXT
+      USPECH            TEXT,
+      ID_ODDIEL         INTEGER
       );
 EOF;
 $db->exec($sql);
     $sql =<<<EOF
-        INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH) SELECT POUZIVATELIA.* FROM POUZIVATELIA LEFT OUTER JOIN PRIHLASENY ON PRIHLASENY.ID_POUZ = POUZIVATELIA.ID 
+        INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, ID_ODDIEL) SELECT POUZIVATELIA.* FROM POUZIVATELIA LEFT OUTER JOIN PRIHLASENY ON PRIHLASENY.ID_POUZ = POUZIVATELIA.ID 
         WHERE PRIHLASENY.ID is null
         OR (PRIHLASENY.ID_PRET <> $this->ID AND PRIHLASENY.ID_POUZ NOT IN 
           (SELECT PRIHLASENY.ID_POUZ FROM PRIHLASENY WHERE ID_PRET = $this->ID));
@@ -379,9 +382,7 @@ EOF;
      $ret1 = $db->exec($sql1);
     if(!$ret){
        echo $db->lastErrorMsg();
-    } else {
-       echo $db->changes(), " Record updated successfully\n";
-    }
+    } 
    $db->close();
     
   }
@@ -462,9 +463,7 @@ static function aktivuj($ID){
 EOF;
 
    $ret = $db->exec($sql);
-   if($ret){
-    echo "Pretek bol aktivovany";
-   }
+   
    
    //echo "Operation done successfully"."<br>";   ////////////////////////////////
    $db->close();
@@ -479,11 +478,29 @@ static function deaktivuj($ID){
 EOF;
 
    $ret = $db->exec($sql);
-   if($ret){
-    echo "Pretek bol deaktivovany";
-   }
+   
    
    //echo "Operation done successfully"."<br>";   ////////////////////////////////
+   $db->close();
+}
+
+static function vypis_zoznam_oddiely(){
+  
+   $db = napoj_db();
+
+   $sql =<<<EOF
+      SELECT * from ODDIELY;
+EOF;
+
+   $ret = $db->query($sql);
+   while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+     
+     
+       echo '<tr><td><input type="radio" name="incharge[]" value="'.$row['id'].'"/></td>';
+       echo '<td>'.$row['id'].'</td><td>'.$row['nazov'] ."</td></tr>";  
+     
+   }
+   //echo "Operation done successfully"."<br>";
    $db->close();
 }
 
@@ -521,6 +538,20 @@ EOF;
    $db->close();
 }
 
+static function vymaz_oddiel($ID){
+  
+   $db = napoj_db();
+
+   $sql =<<<EOF
+      DELETE from Oddiely WHERE ID = $ID;
+EOF;
+
+   $ret = $db->exec($sql);
+   
+   //echo "Operation done successfully"."<br>";
+   $db->close();
+}
+
 static function pridaj_kategoriu($nazov){
    $db = napoj_db();
 
@@ -533,9 +564,23 @@ EOF;
    $ret = $db->exec($sql);
    if(!$ret){
       echo $db->lastErrorMsg();
-   } else {
-      echo "Records created successfully\n";
-   }
+   } 
+   $db->close();
+  }
+  
+static function pridaj_oddiel($nazov){
+   $db = napoj_db();
+
+   $sql =<<<EOF
+      INSERT INTO oddiely (
+         nazov)
+      VALUES ("$nazov");
+EOF;
+
+   $ret = $db->exec($sql);
+   if(!$ret){
+      echo $db->lastErrorMsg();
+   } 
    $db->close();
   }
 

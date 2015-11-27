@@ -117,7 +117,8 @@ if ($zobraz_form) {
       
   </form>
 </div>
-</section> 
+</section>
+<br><br> 
 <?php } 
 unset($pt);
 paticka();

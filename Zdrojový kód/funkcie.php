@@ -434,14 +434,14 @@ if (isset($_GET['odhlas'])){
   <header>
     <h1><?php echo $meno?></h1>
     <nav>
-    <div class="navOdkaz"><a href="index.php">Domov</a></div>
-    <div class="navOdkaz"><a href="#">Členovia klubu</a></div>
+    <a href="index.php">Domov</a>
+    <a href="#">Členovia klubu</a>
       <?php
     if (isset($_SESSION["admin"]) && $_SESSION["admin"]){
-            ?>  <div class="navOdkaz"><a href="?odhlas=1">Odhlásenie</a></div> <?php
+            ?>  <a href="?odhlas=1">Odhlásenie</a> <?php
         }
     else{
-        ?>  <div class="navOdkaz"><a href="prihlasenie.php">Prihlásenie administrátora</a></div> <?php
+        ?>  <a href="prihlasenie.php">Prihlásenie administrátora</a> <?php
     }
       ?>
     

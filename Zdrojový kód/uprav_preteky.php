@@ -133,7 +133,7 @@ if ($zobraz_form) {
 	
 </section> 
   
-<br>
+<br><br><br>
 <footer>
   <div id="footer">TIS - projekt 2014, Registračný systém pre športový klub</div>
 </footer> 
