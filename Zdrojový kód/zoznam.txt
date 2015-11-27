@@ -1,6 +1,4 @@
-Zoznam pretekárov s rovnakými chipmi
-
-Meno Priezvisko Osobne cislo Chip Poznamka
-Zoznam pretekárov s rozdielnymi chipmi
-
-Meno Priezvisko Osobne cislo Chip Poznamka
+MENO;PRIEZVISKO;"OSOBNE CISLO";CIP;POZNAMKA
+Peter;Zeman;12345678;12345678;poznamka
+Matúš;Trebatický;12345432;12345678;poznamka
+Richard;Balogh;SKS6901;2027941;

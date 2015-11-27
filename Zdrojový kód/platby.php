@@ -22,11 +22,11 @@ CLASS PLATBY{
 
   public function pridaj_platbu($ID_POUZ, $DATUM, $SUMA){
    $db = napoj_db();
-
+   $SUMA2 = htmlentities($SUMA, ENT_QUOTES, 'UTF-8');
    $sql =<<<EOF
       INSERT INTO PLATBY (
          ID_POUZ,DATUM,SUMA)
-      VALUES ("$ID_POUZ", "$DATUM", "$SUMA");
+      VALUES ("$ID_POUZ", "$DATUM", "$SUMA2");
 EOF;
 
    $ret = $db->exec($sql);

@@ -24,26 +24,34 @@ class POUZIVATELIA
     $this->os_i_c = $os_i_c;
     $this->chip = $chip;
     $this->poznamka = $poznamka;
-    $this->uspech = $uspech;
+    $this->uspech = stripslashes($uspech);
   }
 
   function pridaj_pouzivatela($meno,$prezvisko,$os_i_c,$chip,$poznamka,$uspech){
+    $meno2 = $meno;
+    $prezvisko2 = $prezvisko;
+    $os_i_c2 = $os_i_c;
+    $chip2 = strtoupper($chip);
+    $poznamka2 = $poznamka;
+    $uspech2 = htmlentities($uspech, ENT_QUOTES, "UTF-8");
 
     $db = napoj_db();
-
+    
    $sql =<<<EOF
       INSERT INTO POUZIVATELIA (
          MENO,PRIEZVISKO,OS_I_C,CHIP,POZNAMKA,USPECH)
-      VALUES ("$meno", "$prezvisko", "$os_i_c", "$chip", "$poznamka","$uspech");
+      VALUES ("$meno2", "$prezvisko2", "$os_i_c2", "$chip2", "$poznamka2","$uspech2");
 EOF;
 
    $ret = $db->exec($sql);
    if(!$ret){
       echo $db->lastErrorMsg();
+      $ret=-1;
    } else {
-      //echo "Records created successfully\n";
+      $ret=$db->lastInsertRowID();
    }
    $db->close();
+   return $ret;
 
   }
 
@@ -53,12 +61,16 @@ EOF;
     $sql =<<<EOF
        SELECT * FROM POUZIVATELIA WHERE ID = $ID;
 EOF;
-    $ret = $db->query($sql);
-    if(!$ret){
-      echo $db->lastErrorMsg();
-      
-      return false;
-   } else {
+$sql1 =<<<EOF
+         SELECT * from POUZIVATELIA WHERE ID=$ID;
+EOF;
+$count = 0;
+if(is_numeric($ID)){
+      $ret = $db->query($sql);
+      $ret2 = $db->query($sql1);
+      $count = $ret2->fetchArray(PDO::FETCH_NUM);
+    }
+    if($count>0){
       //echo "Records got successfully\n";
       
       while($row = $ret->fetchArray(SQLITE3_ASSOC)){
@@ -67,6 +79,9 @@ EOF;
         return $p;
       }
       $db->close();
+   }else{
+
+    echo'Zvoleny pouzivatel neexistuje';
    }
    
     
@@ -97,8 +112,8 @@ EOF;
         //echo '<td><input type="checkbox" name="person" value="'. $row['ID'].'"></td>';
         echo '<td><input type="checkbox" name="incharge[]" value="'.$row['ID'].'"/></td>';
         echo "<td>".$row['ID']."</td>";
-        echo "<td><a href='profil.php?id=".$row['ID']."'><font color='black'>".$row['MENO']."</font></a></td>";
-        echo "<td><a href='profil.php?id=".$row['ID']."'><font color='black'>".$row['PRIEZVISKO']."</font></a></td>";
+        echo "<td><a class='fntbl' href='profil.php?id=".$row['ID']."'>".$row['MENO']."</a></td>";
+        echo "<td><a class='fntbl' href='profil.php?id=".$row['ID']."'>".$row['PRIEZVISKO']."</a></td>";
         echo "<td>".$row['OS_I_C']."</td>";
         echo "<td>".$row['CHIP']."</td>";
         echo "<td>".$row['POZNAMKA']."</td>";
@@ -120,11 +135,13 @@ static function vymaz_pouzivatela($ID){
     $sql =<<<EOF
        DELETE FROM POUZIVATELIA WHERE ID = $ID;
        DELETE FROM PRIHLASENY WHERE ID_POUZ = $ID;
+       DELETE FROM PLATBY WHERE ID_POUZ = $ID;
 EOF;
     $ret = $db->exec($sql);
     if(!$ret){
       echo $db->lastErrorMsg();
    } else {
+      vymaz_obrazok($ID);
       //echo "Records removed successfully\n";
    }
    $db->close();
@@ -134,13 +151,19 @@ EOF;
 
 function uprav_pouzivatela ($MENO, $PRIEZVISKO, $OS_I_C, $CHIP, $POZNAMKA, $uspech){
     $db = napoj_db();
+    $MENO2 = $MENO;
+    $PRIEZVISKO2 = $PRIEZVISKO;
+    $OS_I_C2 = $OS_I_C;
+    $CHIP2 = strtoupper($CHIP);
+    $POZNAMKA2 = $POZNAMKA;
+    $uspech2 = htmlentities($uspech, ENT_QUOTES, "UTF-8");
     $sql =<<<EOF
-       UPDATE POUZIVATELIA set MENO = "$MENO" where ID="$this->id";
-       UPDATE POUZIVATELIA set PRIEZVISKO = "$PRIEZVISKO" where ID="$this->id";
-       UPDATE POUZIVATELIA set OS_I_C = "$OS_I_C" where ID="$this->id";
-       UPDATE POUZIVATELIA set CHIP = "$CHIP" where ID="$this->id";
-       UPDATE POUZIVATELIA set POZNAMKA = "$POZNAMKA" where ID="$this->id";
-       UPDATE POUZIVATELIA set USPECH = "$uspech" where ID="$this->id";
+       UPDATE POUZIVATELIA set MENO = "$MENO2" where ID="$this->id";
+       UPDATE POUZIVATELIA set PRIEZVISKO = "$PRIEZVISKO2" where ID="$this->id";
+       UPDATE POUZIVATELIA set OS_I_C = "$OS_I_C2" where ID="$this->id";
+       UPDATE POUZIVATELIA set CHIP = "$CHIP2" where ID="$this->id";
+       UPDATE POUZIVATELIA set POZNAMKA = "$POZNAMKA2" where ID="$this->id";
+       UPDATE POUZIVATELIA set USPECH = "$uspech2" where ID="$this->id";
 EOF;
     $ret = $db->exec($sql);
     if(!$ret){

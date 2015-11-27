@@ -11,10 +11,16 @@ session_start();
 <html>
 <?php
 hlavicka("Prihlásenie administrátora");
+
+if (isset($_POST['heslo'])&&$_POST['heslo']=="olympiada"){
+  $_SESSION['admin']=1;
+  echo "<META http-equiv='refresh' content='0;URL=index.php'>";
+}else{
+
 ?>
 <form method="post">
     <div id="prihlasenieAdministratora">
-        <h2>Prihlásenie administrátora<h2>
+        <h2>Prihlásenie administrátora</h2>
         <table style="width:100%;">  
           <tr>
             <td><label for="heslo">Heslo:</label></td>
@@ -38,6 +44,7 @@ hlavicka("Prihlásenie administrátora");
     </div>
 </form>
 <?php
+}
 paticka();        
 ?>
 

@@ -26,11 +26,15 @@ if(isset($_POST['vymaz'])){
 <html>
 
 <head>
+  <?php
+   
+    if($po){?>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+  <script src="thumbnailviewer.js" type="text/javascript"></script>
       
 	<title>Registracny system</title>
   <link rel="stylesheet" href="styl/styly.css">  
+  <link rel="stylesheet" href="thumbnailviewer.css"> 
       
 </head>
 
@@ -81,7 +85,11 @@ unset($po);
 
 
 </section> 
-  
+<?php 
+
+}
+unset($po);
+?>
   
 </body>
 

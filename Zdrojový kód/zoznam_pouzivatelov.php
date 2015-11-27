@@ -30,8 +30,8 @@ $po = new POUZIVATELIA();
   
 <section id="vsetci_pouzivatelia"> 
   <form method="post">
-    <h2>Zoznam používateľov<h2>
-    <table border="1" style="width:100%">
+    <h2>Zoznam používateľov</h2>
+    <table border="1">
       <tr> 
         <td class="prvy"></td>
         <td class="prvy">ID</td>
@@ -50,7 +50,7 @@ $po = new POUZIVATELIA();
 
     
    <p> 
-    <input name="del" type="submit" id="del" value="Vymazať používateľa"> <!-- aj v admine kde su vsetci pouzivatelia-->
+    <input name="del" type="submit" id="del" onclick="return confirm('Naozaj chcete vymazať používateľa?');" value="Vymazať používateľa"> <!-- aj v admine kde su vsetci pouzivatelia-->
     <input name="novy" type="submit" id="novy" value="Nový používateľ"> <!-- aj v admine kde su vsetci pouzivatelia-->
    </p>
   </form>
@@ -117,12 +117,12 @@ if ((isset ($_POST['posli'])) &&
 
 
 
-
+//$zobraz_form =true;
 if ($zobraz_form) {
 ?>
 
 <div  id="novy_pouzivatel">
-	<form border="1" method="post" enctype="multipart/form-data">
+	<form method="post" enctype="multipart/form-data">
     <h2>Nový používateľ</h2>
 		<table>
     <tr>
@@ -155,11 +155,11 @@ if ($zobraz_form) {
 	  <p id="buttons">
       <input type="submit" name="posli" value="Pridaj používateľa">
       <input type="submit" name="stop" value="Koniec">
-     <?php } ?>
+     
 		</p>  
   </form>
 </div>
-	
+<?php } ?>	
 </section>
   
   

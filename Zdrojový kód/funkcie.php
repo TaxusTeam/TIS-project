@@ -1,4 +1,5 @@
-<?php
+<?php 
+date_default_timezone_set('UTC');
 class MyDB extends SQLite3
    {
       function __construct()
@@ -43,76 +44,31 @@ $sql =<<<EOF
 EOF;
 $ret = $db->query($sql);
 
-
+    
     $myfile = fopen("zoznam.txt", "w") or die("Unable to open file!");
-    fwrite($myfile, "Zoznam pretekárov s rovnakými chipmi\n\n");
-    fwrite($myfile, "Meno");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Priezvisko");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Osobne cislo");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Chip");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Poznamka");
-        fwrite($myfile, "\n");
-
-      while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-        //echo $row['ID'],$row['MENO'],$row['PRIEZVISKO'],$row['OS_I_C'],$row['CHIP'],$row['POZNAMKA']."<br>";
-        fwrite($myfile, $row['MENO']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['PRIEZVISKO']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['OS_I_C']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['CHIP']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['POZNAMKA']);
-        fwrite($myfile, "\n");
-
-
-
-      }
-
-      fwrite($myfile, "Zoznam pretekárov s rozdielnymi chipmi\n\n");
-      fwrite($myfile, "Meno");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Priezvisko");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Osobne cislo");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Chip");
-        fwrite($myfile, " ");
-        fwrite($myfile, "Poznamka");
-        fwrite($myfile, "\n");
+    fputcsv($myfile, array("MENO","PRIEZVISKO","OSOBNE CISLO","CIP","POZNAMKA"), ";");
+    while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+      fputcsv($myfile,array($row['MENO'],$row['PRIEZVISKO'],$row['OS_I_C'],$row['CHIP'],$row['POZNAMKA']),";");
+    }
       $sql =<<<EOF
          SELECT temp.* FROM temp WHERE temp.CHIP in (SELECT temp.CHIP from temp GROUP BY temp.CHIP HAVING COUNT (temp.CHIP) = 1);
 EOF;
 
-
 $ret = $db->query($sql);
       while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-        //echo $row['ID'],$row['MENO'],$row['PRIEZVISKO'],$row['OS_I_C'],$row['CHIP'],$row['POZNAMKA']."<br>";
-        fwrite($myfile, $row['MENO']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['PRIEZVISKO']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['OS_I_C']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['CHIP']);
-        fwrite($myfile, " ");
-        fwrite($myfile, $row['POZNAMKA']);
-        fwrite($myfile, "\n");
-
-      }
+        fputcsv($myfile,array($row['MENO'],$row['PRIEZVISKO'],$row['OS_I_C'],$row['CHIP'],$row['POZNAMKA']),";");
+    }
        // echo "Operation done successfully"."<br>";      ////////////////////////////
       $sql =<<<EOF
          DROP TABLE TEMP;
 EOF;
+
        $db->exec($sql);
        fclose($myfile);
        $db->close();
   }
+
+
 
 
 
@@ -341,45 +297,46 @@ else{
 function zobraz_obrazok($id){
   if(file_exists('pictures/'.$id.'.gif')){
         $subor = 'pictures/' . $id .'.gif';
-echo'<img src="'.$subor.'" alt="" />';
+
+echo'<a href="'.$subor.'" class="thumbnail" ><img class="img" src="'.$subor.'" alt="" /></a>';
 ?>
 <label for="obrazok">Pridaj foto:</label>
         <br>
 <input type="file" name="obrazok" id="obrazok" accept="image/png, image/jpg, image/gif, image/jpeg"><br>
-<input type="submit" name="vymaz" value="Vymaž foto"><br>
+<input type="submit" name="vymaz" onclick="return confirm('Naozaj chcete vymazať fotku?');" value="Vymaž foto"><br>
 <input type="submit" name="posli3" value="Zmeň foto"> <br>
 <?php
         }
   else  if(file_exists('pictures/'.$id.'.png')){
         $subor = 'pictures/' . $id .'.png';
-echo'<img src="'.$subor.'" alt="" />';
+echo'<a href="'.$subor.'" class="thumbnail" ><img class="img" src="'.$subor.'" alt="" /></a>';
 ?>
 <label for="obrazok">Pridaj foto:</label>
         <br>
 <input type="file" name="obrazok" id="obrazok" accept="image/png, image/jpg, image/gif, image/jpeg"><br>
-<input type="submit" name="vymaz" value="Vymaž foto"><br>
+<input type="submit" name="vymaz" onclick="return confirm('Naozaj chcete vymazať fotku?');" value="Vymaž foto"><br>
 <input type="submit" name="posli3" value="Zmeň foto"> <br>
 <?php
         }
   else  if(file_exists('pictures/'.$id.'.jpg')){
         $subor = 'pictures/' . $id .'.jpg';
-echo'<img src="'.$subor.'" alt="" />';
+echo'<a href="'.$subor.'" class="thumbnail" ><img class="img" src="'.$subor.'" alt="" /></a>';
 ?>
 <label for="obrazok">Pridaj foto:</label>
         <br>
 <input type="file" name="obrazok" id="obrazok" accept="image/png, image/jpg, image/gif, image/jpeg"><br>
-<input type="submit" name="vymaz" value="Vymaž foto"><br>
+<input type="submit" name="vymaz" onclick="return confirm('Naozaj chcete vymazať fotku?');" value="Vymaž foto"><br>
 <input type="submit" name="posli3" value="Zmeň foto"> <br>
 <?php
         }
   else  if(file_exists('pictures/'.$id.'.jpeg')){
         $subor = 'pictures/' . $id .'.jpeg';
-echo'<img src="'.$subor.'" alt="" />';
+echo'<a href="'.$subor.'" class="thumbnail" ><img class="img" src="'.$subor.'" alt="" /></a>';
 ?>
 <label for="obrazok">Pridaj foto:</label>
         <br>
 <input type="file" name="obrazok" id="obrazok" accept="image/png, image/jpg, image/gif, image/jpeg"><br>
-<input type="submit" name="vymaz" value="Vymaž foto"><br>
+<input type="submit" name="vymaz" onclick="return confirm('Naozaj chcete vymazať fotku?');" value="Vymaž foto"><br>
 <input type="submit" name="posli3" value="Zmeň foto"> <br>
 <?php
         }else{
@@ -453,7 +410,15 @@ EOF;
    $db->close();
 }
 
+function over($text){
+  return strlen($text) >0;
+
+}
+
 function hlavicka($meno=""){
+if (isset($_GET['odhlas'])){
+  $_SESSION['admin']=0;
+}
 ?>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -463,23 +428,26 @@ function hlavicka($meno=""){
      
 </head>
 
-<body>
+
   <header>
     <h1><?php echo $meno?></h1>
-  </header>
-
-  <nav>
-    <div class="navClenovia"><a href="#">Členovia klubu</a></div>
+    <nav>
+    <div class="navOdkaz"><a href="index.php">Domov</a></div>
+    <div class="navOdkaz"><a href="#">Členovia klubu</a></div>
       <?php
     if (isset($_SESSION["admin"]) && $_SESSION["admin"]){
-            ?> <div class="navPrihlasenie"><a href="#">Odlásenie</a></div> <?php
+            ?>  <div class="navOdkaz"><a href="?odhlas=1">Odhlásenie</a></div> <?php
         }
     else{
-        ?> <div class="navPrihlasenie"><a href="prihlasenie.php">Prihlásenie administrátora</a></div> <?php
+        ?>  <div class="navOdkaz"><a href="prihlasenie.php">Prihlásenie administrátora</a></div> <?php
     }
       ?>
     
-  </nav>
+    </nav>
+  </header>
+
+<body>
+  
 <?php
 }
 
@@ -493,4 +461,5 @@ function paticka(){
 </body>
     <?php
 }
+
 ?>

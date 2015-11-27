@@ -20,30 +20,22 @@ header{
     text-align: center;
 	 font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
-.navClenovia{
-	position: relative;
-	float: left;
+
+.navOdkaz{
 	background-color: rgb(85, 170, 85);
-	top: 3%;
-	width: 15%;
-	padding:10px; 
-    text-align: center;
+	padding: 0.5em;
+	display:inline; 
+  text-align: center;
+  margin: auto;
 }
-.navPrihlasenie{
-	position: relative;
-	float: right;
-	background-color: rgb(85, 170, 85);
-	top: 3%;
-	width: 15%;
-	padding:10px; 
-	 text-align: center;
-}
+
 nav a{
-	color:black;
+color:black;
 	text-decoration: none;   
 	font-size: 20px; 
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
+
 nav :hover{background-color: rgb(136, 204, 136);}
 
 .nadpis_table {

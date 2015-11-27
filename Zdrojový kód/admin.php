@@ -4,7 +4,6 @@ include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
 include('platby.php');
-$_SESSION['admin'] = 1;
 $zobraz_form = false;
 if (isset ($_POST['novy'])){
     $zobraz_form = true;

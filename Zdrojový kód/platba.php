@@ -61,9 +61,10 @@ $po = POUZIVATELIA::vrat_pouzivatela($_GET["id"]);
           
       </table>
       <p>
+
         <input name="novy" type="submit" id="novy" value="Nová platba">
         <!--<input name="edit" type="submit" id="edit" value="Upravit platbu"> -->
-        <input name="del" type="submit" id="del" value="Vymazať platbu"> 
+        <input name="del" type="submit" id="del" onclick="return confirm('Naozaj chcete vymazať platbu?');" value="Vymazať platbu"> 
       </p>
       
     </form>
@@ -94,7 +95,7 @@ if ((isset($_POST['del']) && (isset($_POST['incharge'])) ))
     }
 }
 
-if (isset($_POST['novy'])) 
+if (isset($_POST['novy']) || isset($_POST['posli'])) 
 {
     
     
@@ -131,8 +132,8 @@ if ((isset($_POST['edit']) && (isset($_POST['incharge'])) ))
 <?php
 
 if ((isset($_POST['posli'])) &&
-    (isset ($_POST['kedy'])  || 
-    isset ($_POST['kolko']) )) {
+    (over ($_POST['kedy'])  && 
+    over ($_POST['kolko']) )) {
     
      $pl->pridaj_platbu($_GET['id'],$_POST['kedy'],$_POST['kolko']);
      echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
@@ -150,25 +151,29 @@ if ($zobraz_form) {
 	<form method="post" enctype="multipart/form-data">
   <h2>Pridať platbu</h2>
 	<table>
+    <?php if(isset($_POST['kedy']) && !over($_POST['kedy'])){echo'<tr><td><font color="red">Nevyplnili ste datum!</font></td></tr>';} ?>
     <tr>
-		  <td><label for="kedy">Dátum:</label></td>
-		  <td><input type="text" name="kedy" id="datetimepicker" size="30" value="<?php echo $pl->DATUM; ?>"></td>
+      
+		  <td><label for="datetimepicker">Dátum:</label></td>
+		  <td><input type="text" name="kedy" id="datetimepicker" size="30" value="<?php if(isset($_POST['kedy'])){echo $_POST['kedy'];} ?>"></td>
 		</tr>
+    <?php if(isset($_POST['kolko']) && !over($_POST['kolko'])){echo'<tr><td><font color="red">Nevyplnili ste sumu!</font></td></tr>';} ?>
     <tr>
       <td><label for="kolko">Suma:</label> </td>
-		  <td><input type="text" name="kolko" id="kolko" size="30" value="<?php echo $pl->SUMA; ?>"></td>
+		  <td><input type="text" name="kolko" id="kolko" size="30" value="<?php if(isset($_POST['kolko'])){echo $_POST['kolko'];} ?>"></td>
 		</tr>
   </table>
 		           
 	  	<p id="buttons">
         <input type="submit" name="posli" value="Pridaj">
         <input type="submit" name="cancel" value="Koniec">
-        <?php } ?>
+       
 		  </p>
         
   </form>
+   
 </div>
-
+<?php } ?>
   </section>
   
   <br>
