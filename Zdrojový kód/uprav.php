@@ -117,13 +117,12 @@ if ($zobraz_form) {
       
   </form>
 </div>
+</section> 
 <?php } 
 unset($pt);
+paticka();
 ?> 
-</section> 
-  
-  
-</body>
+
 
 
 
