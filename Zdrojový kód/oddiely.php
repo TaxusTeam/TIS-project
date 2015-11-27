@@ -14,34 +14,34 @@ include('preteky.php');
 if (!isset($_SESSION['admin']) || !$_SESSION['admin']){
   echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL=index.php">';
 }else{
-hlavicka("Kateórie");
+hlavicka("Oddiely");
 ?> 
   
 <section>
  
 <div id="tab_platby">  
     <form method="post">
-      <h2>Kategórie</h2>
+      <h2>Oddiely</h2>
       <table border="1" style="width:100%">
           <tr>
             <td class="prvy"></td>
-            <td class="prvy">ID kategórie</td>
+            <td class="prvy">ID oddielu</td>
             <td class="prvy">Názov</td>
             
           </tr>
           
              <?php
       $pl = new PRETEKY();
-      PRETEKY::vypis_zoznam_kategorii();
+      PRETEKY::vypis_zoznam_oddiely();
       //unset($pl);
       ?>
           
       </table>
       <p>
 
-        <input name="novy" type="submit" id="novy" value="Nová kategória">
+        <input name="novy" type="submit" id="novy" value="Nový oddiel">
         <!--<input name="edit" type="submit" id="edit" value="Upravit platbu"> -->
-        <input name="del" type="submit" id="del" onclick="return confirm('Naozaj chcete vymazať kategóriu?');" value="Vymazať kategóriu"> 
+        <input name="del" type="submit" id="del" onclick="return confirm('Naozaj chcete vymazať oddiel?');" value="Vymazať oddiel"> 
       </p>
       
     </form>
@@ -63,7 +63,7 @@ if ((isset($_POST['del']) && (isset($_POST['incharge'])) ))
     {
          foreach($_POST['incharge'] as $val)     // id platby
          {
-            PRETEKY::vymaz_kategoriu($val);
+            PRETEKY::vymaz_oddiel($val);
             //echo $val . '<br />';
             //echo $val."<br>";
             echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
@@ -111,7 +111,7 @@ if ((isset($_POST['edit']) && (isset($_POST['incharge'])) ))
 if ((isset($_POST['posli'])) &&
     (over ($_POST['nazov']))) {
     
-     PRETEKY::pridaj_kategoriu($_POST['nazov']);
+     PRETEKY::pridaj_oddiel($_POST['nazov']);
      echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
     }
     
@@ -125,7 +125,7 @@ if ($zobraz_form) {
 ?>
 <div id="novy_pouzivatel">
 	<form method="post" enctype="multipart/form-data">
-  <h2>Pridať kategóriu</h2>
+  <h2>Pridať oddiel</h2>
 	<table>
     <?php if(isset($_POST['nazov']) && !over($_POST['nazov'])){echo'<tr><td><font color="red">Nevyplnili ste názov!</font></td></tr>';} ?>
     <tr>

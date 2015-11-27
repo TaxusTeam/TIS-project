@@ -3,49 +3,19 @@ session_start();
 include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
-include('platby.php');
 
-
-
-?>
-<!DOCTYPE HTML>
-
-<html>
-
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
-	<title>Registracny system</title>
-  <link rel="stylesheet" href="styl/styly.css">  
-     
-</head>
-
-<body>
-  <header>
-
-    <?php 
-    $po = new PRETEKY();
-  $po = PRETEKY::vrat_pretek($_GET["id"]);
-    echo "<h1>Upraviť preteky ".$po->ID." - ".$po->NAZOV."</h1>"; 
-    unset($po);
-    ?>
-  </header>
-  
-  <nav>
-  <a href="admin.php">Späť</a>
-  </nav>  
-  
-<section id="uprav_preteky">
-<?php
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']){
+  echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL=index.php">';
+}else{
 
 $zobraz_form = true; 
 if(isset($_POST['aktivuj'])){
   PRETEKY::aktivuj($_GET['id']);
-  echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
+
 }
 if(isset($_POST['deaktivuj'])){
   PRETEKY::deaktivuj($_GET['id']);
-  echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
+
 }
 
 if ((isset ($_POST['posli'])) && 
@@ -71,7 +41,7 @@ if ((isset ($_POST['posli'])) &&
         
     }
   unset($po);
-  echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
+  echo '<meta http-equiv="refresh" content="0; URL=index.php">';
      
 } 
 if (isset($_POST['zmaz']) ){
@@ -80,9 +50,26 @@ if (isset($_POST['zmaz']) ){
   PRETEKY::vymaz_pretek($_GET['id']);
   unset($po);  
   echo '<p class="chyba">Vymazane!</p>';
-  echo '<meta http-equiv="refresh" content="0; URL=admin.php">'; 
+  echo '<meta http-equiv="refresh" content="0; URL=index.php">'; 
    
 }
+
+?>
+<!DOCTYPE HTML>
+
+<html>
+<?php 
+    $po = new PRETEKY();
+  $po = PRETEKY::vrat_pretek($_GET["id"]);
+  hlavicka("Upraviť preteky ".$po->ID." - ".$po->NAZOV);
+  unset($po);
+    ?>
+    
+  
+<section id="uprav_preteky">
+<?php
+
+
 
 if ($zobraz_form) {
   $po = new PRETEKY();
@@ -173,8 +160,10 @@ if ($zobraz_form) {
 
   </script>  
   
-</body>
-
+<?php 
+paticka();
+}
+?>
 
 
 </html>

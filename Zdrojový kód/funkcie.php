@@ -465,14 +465,4 @@ function paticka(){
     <?php
 }
 
-function show_option_values($array){
-    foreach($array as $value){
-        echo '<option value="'.$value.'">'.$value.'</option>';
-    }
-}
-
-function sprava_vykonu(){
-    
-}
-
 ?>

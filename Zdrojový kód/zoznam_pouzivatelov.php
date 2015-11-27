@@ -2,7 +2,6 @@
 include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
-include('platby.php');
 
 $po = new POUZIVATELIA();
 ?>
@@ -11,22 +10,7 @@ $po = new POUZIVATELIA();
 
 <html>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
-	<title>Registracny system</title>
-  <link rel="stylesheet" href="styl/styly.css">  
-   
-</head>
-
-<body>
-  <header>
-    <h1>Admin - Zoznam všetkých používateľov</h1>
-  </header> 
-
-  <nav>
-  <a href="admin.php">Späť</a>     
-  </nav>
+<?php hlavicka("Členovia klubu");?>
   
 <section id="vsetci_pouzivatelia"> 
   <form method="post">
