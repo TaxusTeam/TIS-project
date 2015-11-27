@@ -424,11 +424,13 @@ if (isset($_GET['odhlas'])){
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     
 	<title><?php echo $meno?></title>
-  <link rel="stylesheet" href="styl/styly.css">  
+  <link rel="stylesheet" href="styl/styly.css">
+  <link rel="stylesheet" href="sorter/themes/blue/style.css"> 
+  <link rel="stylesheet" href="thumbnailviewer.css"> 
      
 </head>
 
-
+<body>
   <header>
     <h1><?php echo $meno?></h1>
     <nav>
@@ -446,19 +448,20 @@ if (isset($_GET['odhlas'])){
     </nav>
   </header>
 
-<body>
+
   
 <?php
 }
 
 function paticka(){
     ?>
+
     
   <footer>
     <div id="footer">TIS - projekt 2015, Registračný systém pre športový klub</div>
   </footer>  
-
 </body>
+
     <?php
 }
 

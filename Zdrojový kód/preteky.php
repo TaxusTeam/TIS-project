@@ -132,9 +132,7 @@ EOF;
    $ret = $db->exec($sql);
    if(!$ret){
       echo $db->lastErrorMsg();
-    } else {
-      echo "uspesne pridane";
-    }
+    } 
     $db->close();
 }
 
@@ -180,11 +178,11 @@ EOF;
         echo "<tr>";
         echo '<td><input type="checkbox" name="incharge[]" value="'.$row['ID'].'"/></td>';
         
-        echo "<td class='fnt'><a class='fnt' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['MENO']."</a></td>";      //***********************
-        echo "<td class='fnt'><a class='fnt' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['PRIEZVISKO']."</a></td>";
+        echo "<td class='fnt'><a class='fnt' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'><strong class=upozornenie>".$row['MENO']."</strong></a></td>";      //***********************
+        echo "<td class='fnt'><a class='fnt' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'><strong class=upozornenie>".$row['PRIEZVISKO']."</strong></a></td>";
         echo "<td class='fnt'>".$row['KAT']."</td>";
         echo "<td class='fnt'>".$row['OS_I_C']."</td>";
-        echo "<td class='fnt'>".$row['CHIP']."</td>";
+        echo "<td class='fnt'><strong class=upozornenie>".$row['CHIP']."</strong></td>";
         echo "<td class='fnt'>".$row['POZNAMKA']."</td>";
         echo "<td>
         <a class='fntb' href='uprav.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>Uprav</a></td></tr> ";

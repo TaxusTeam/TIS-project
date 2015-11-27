@@ -3,7 +3,6 @@ session_start();
 include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
-include('platby.php');
 
 $po = new POUZIVATELIA();
 $po = POUZIVATELIA::vrat_pouzivatela($_GET["id"]);
@@ -24,35 +23,8 @@ if(isset($_POST['vymaz'])){
 <!DOCTYPE HTML>
 
 <html>
-
-<head>
-  <?php
-   
-    if($po){?>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <script src="thumbnailviewer.js" type="text/javascript"></script>
-      
-	<title>Registracny system</title>
-  <link rel="stylesheet" href="styl/styly.css">  
-  <link rel="stylesheet" href="thumbnailviewer.css"> 
-      
-</head>
-
-<body>
-  <header>
-    <?php echo "<h1>Upraviť údaje používateľa -  ".$po->meno." ".$po->priezvisko."</h1>"; ?>
-  </header>
-  
-<nav><?php
-    if (isset ($_GET["pr"])) {  
-      echo "<a href='pretek.php?id=". $_GET["pr"] ."'>Späť</a>";
-    }
-    else {
-      echo "<a href='zoznam_pouzivatelov.php'>Späť</a>";
-    }
-    ?>
-</nav>
-  
+<script src="thumbnailviewer.js" type="text/javascript"></script>
+<?php hlavicka("Upraviť údaje používateľa -  ".$po->meno." ".$po->priezvisko);?>
   
 <section id="uprav"><div id="profil">
 <div id="foto">
@@ -79,20 +51,12 @@ unset($po);
 </div>
 </div>
   
-
-  
-
-
-
 </section> 
 <?php 
 
 }
 unset($po);
+paticka();
 ?>
-  
-</body>
-
-
 
 </html>

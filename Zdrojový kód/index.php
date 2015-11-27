@@ -2,7 +2,6 @@
 include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
-include('platby.php');
 session_start();
 
 if (isset($_GET['odhlas'])){

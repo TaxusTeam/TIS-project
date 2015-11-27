@@ -3,7 +3,6 @@ session_start();
 include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
-include('platby.php');
 $navodik = false;
 if(isset($_POST['export'])){
   vypis_db();?>
@@ -14,14 +13,15 @@ if(isset($_POST['export'])){
 
 if (isset($_POST['prihlas'])) 
 {
+    
     // PHP throws a fit if we try to loop a non-array
     if(is_array($_POST['incharge']))
     {
          $cookies="";
          foreach($_POST['incharge'] as $val)
          {  
-            if($val!="-"){
             
+            if($val!="-"){
               if ($cookies!=""){$cookies.="#";}
               $cookies.=$val;
               
@@ -70,7 +70,7 @@ $po = new POUZIVATELIA();
 if (isset ($_POST['posli'])&&over($_POST['meno'])&&over($_POST['priezvisko'])){ 
 
    $id_novy=$po->pridaj_pouzivatela ($_POST['meno'], $_POST['priezvisko'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'],"");
-   if ($id_novy>-1 && isset($_POST['kategoria'])){
+   if ($id_novy>-1 && isset($_POST['kategoria']) && $_POST['kategoria']!='-'){
     echo ":)";
     PRETEKY::prihlas_na_pretek($_GET["id"], $id_novy,$_POST['kategoria']);
     if (isset($_COOKIE['posledni_prihlaseni'])){setcookie("posledni_prihlaseni", $_COOKIE['posledni_prihlaseni']."#".$id_novy, time() + (86400 * 366),"/");}
@@ -93,8 +93,6 @@ if(isset($_POST['skry'])){
 ?>
 <!DOCTYPE HTML>
 <html>
-
-<head>
 <script type="text/javascript" src="sorter/jquery-latest.js"></script>
 <script type="text/javascript" src="sorter/jquery.tablesorter.js"></script>
 <script type="text/javascript">
@@ -110,61 +108,14 @@ if(isset($_POST['skry'])){
     $("#myTable2").tablesorter();
   }
 );
-  </script>
-
-
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">     
-  
-      <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />  -->
-      
-	<title>Registracny system</title>
-  <link rel="stylesheet" href="styl/styly.css">  
-  <link rel="stylesheet" href="sorter/themes/blue/style.css"> 
-  <!--<link rel="stylesheet" type="text/css" media="screen and (max-device-width: 480px)" href="styl/styly2.css" />   -->
-      
-
-
-</head>
-<body>
+  </script> 
 <?php
-    $pt = new PRETEKY();
-    $pt=PRETEKY::vrat_pretek($_GET["id"]);
-    if($pt){
-    
-     echo "<h1>" . $pt->NAZOV . "</h1>";  
-   
-    
-    ?>
-
-
-
-
+  $pr = new PRETEKY();
+  $pr=PRETEKY::vrat_pretek($_GET["id"]);
+  hlavicka($pr->NAZOV);
+  unset($pr);
+?>
 <section> 
-
-  <header><?php
-    $pr = new PRETEKY();
-    $pr=PRETEKY::vrat_pretek($_GET["id"]);
-    if($pr){
-    
-     echo "<h1>" . $pr->NAZOV . "</h1>";	
-   }
-    unset($pr);
-    ?>
-  </header> 
-  
-  <nav>
-    <?php
-    
-    if(isset($_SESSION['admin'])&&$_SESSION['admin'] ==1 ){
-
-      echo "<a href='admin.php'>Späť</a><br>";
-    }
-    else {
-      echo "<a href='index.php'>Späť</a>";
-    }
-    ?>
-  </nav>
     
 
     <?php
@@ -252,7 +203,7 @@ if($navodik){
   
   <div id="odhlaseny">
   <?php
-  $d1 = new DateTime($pt->DEADLINE);
+  $d1 = new DateTime($pr->DEADLINE);
     $d2 = new DateTime(date("Y-m-d H:i:s"));
    if((isset($_SESSION['admin'])&&$_SESSION['admin']==1) || $d1 > $d2){ ?>
   <h2>Neprihlásení používatelia</h2>
@@ -270,7 +221,7 @@ if($navodik){
       <tr>
         
         
-        
+        <th class="prvy"></th>
         <th class="prvy">Meno</th> 
         <th class="prvy">Priezvisko</th>
         <th class="prvy">Kategória</th>
@@ -290,13 +241,15 @@ if($navodik){
         ?>
       </tbody>
     </table>
-    <a href=<?php echo "pretek.php?id=".$_GET['id']."&cookies=0"; ?>>Viac používateľov</a>
-  
-    <p>
-    <?php 
-    $d1 = new DateTime($pt->DEADLINE);
+    <?php if (!isset($_GET['cookies'])){?>
+      <a href=<?php echo "pretek.php?id=".$_GET['id']."&cookies=0"; ?>>Viac používateľov</a>
+    <?php }else{?>
+      <a href=<?php echo "pretek.php?id=".$_GET['id']; ?>>Menej používateľov</a>
+    <?php
+    } 
+    $d1 = new DateTime($pr->DEADLINE);
     $d2 = new DateTime(date("Y-m-d H:i:s"));
-    if((isset($_SESSION['admin'])&&$_SESSION['admin']==1)||(isset($pt->AKTIV)&&$pt->AKTIV==1&&isset($pt->DEADLINE))&&$d1>$d2){ echo''; ?>
+    if((isset($_SESSION['admin'])&&$_SESSION['admin']==1)||(isset($pr->AKTIV)&&$pr->AKTIV==1&&isset($pr->DEADLINE))&&$d1>$d2){ echo''; ?>
         <input name="prihlas" type="submit" id="prihlas" value="Prihlásiť na preteky">
         
         <?php } else if($d1<$d2){echo "Prihlasovanie na tento pretek bolo uzatvorene</p> <p>";} ?>
@@ -309,9 +262,7 @@ if($navodik){
     <?php
     }
     ?>
-   </p><p>
-      
-  </p>  <br><br><br>
+   
   <?php } else{echo "<p>Prihlasovanie na tento pretek bolo uzatvorene</p>";} ?>
 </div>
 
@@ -320,6 +271,7 @@ if($navodik){
 
     <?php    
     unset($pr);
+    paticka();
     ?>
 
 
@@ -345,19 +297,5 @@ if($navodik){
 
 	
 </section>
-  <?php
-}
-unset($pt);
-   ?>
-  
-  
-  <br>
-  <footer>
-    <div id="footer">TIS - projekt 2014, Registracny system pre sportovy klub</div>
-  </footer> 
-  
-  
-</body>
-
 
 </html>
