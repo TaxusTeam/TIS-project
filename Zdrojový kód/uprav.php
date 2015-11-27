@@ -19,37 +19,11 @@ if(isset($_POST['vymaz'])){
 
 }
 
-?>
-<!DOCTYPE HTML>
-
-<html>
-<script src="thumbnailviewer.js" type="text/javascript"></script>
-<?php hlavicka("Upraviť údaje používateľa -  ".$po->meno." ".$po->priezvisko);?>
-
-  
-  
-<section id="uprav"><div id="profil">
-<div id="foto">
-  <form method="post" enctype="multipart/form-data">
-<?php zobraz_obrazok($_GET['id']); ?>
-
-</form>
-</div>
-</div>
-
-
-
-  
-<?php 
 $zobraz_form = true;
 
 if (isset ($_POST['posli2']) )  { 
   $po->vymaz_pouzivatela($_GET['id']);
-  if(isset($_SESSION['admin'])&&$_SESSION['admin']==1){
-    echo '<meta http-equiv="refresh" content="0; URL=admin.php">';
-  }else{
-    echo '<meta http-equiv="refresh" content="0; URL=index.php">';
-  }
+  echo '<meta http-equiv="refresh" content="0; URL=index.php">';
   //unset($po);
   
   ?>
@@ -65,7 +39,7 @@ if ((isset ($_POST['posli'])) &&
     over ($_POST['priezvisko']) )  { 
 
   $po->uprav_pouzivatela ($_POST['meno'], $_POST['priezvisko'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'], $_POST['uspech']);
-echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
+
  
   unset($po);
   $po = new POUZIVATELIA();
@@ -75,7 +49,31 @@ echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
   <?php
 
     
-} 
+}
+
+?>
+<!DOCTYPE HTML>
+
+<html>
+
+<?php hlavicka("Upraviť údaje používateľa -  ".$po->meno." ".$po->priezvisko);?>
+
+  
+<script src="thumbnailviewer.js" type="text/javascript"></script>  
+<section id="uprav"><div id="profil">
+<div id="foto">
+  <form method="post" enctype="multipart/form-data">
+<?php zobraz_obrazok($_GET['id']); ?>
+
+</form>
+</div>
+</div>
+
+
+
+  
+<?php 
+ 
 
 if ($zobraz_form) {
 ?>
@@ -120,7 +118,6 @@ if ($zobraz_form) {
   </form>
 </div>
 <?php } 
-}
 unset($pt);
 ?> 
 </section> 

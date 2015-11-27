@@ -23,9 +23,9 @@ if(isset($_POST['vymaz'])){
 <!DOCTYPE HTML>
 
 <html>
-<script src="thumbnailviewer.js" type="text/javascript"></script>
+
 <?php hlavicka("Upraviť údaje používateľa -  ".$po->meno." ".$po->priezvisko);?>
-  
+<script src="thumbnailviewer.js" type="text/javascript"></script>  
 <section id="uprav"><div id="profil">
 <div id="foto">
   <form method="post" enctype="multipart/form-data">

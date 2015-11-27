@@ -11,29 +11,12 @@ include('platby.php');
 
 <html>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-      
-	<title>Registracny system</title>
-  <link rel="stylesheet" href="styl/styly.css">  
-      
-</head>
-
-<body>
-  <header>
-    <?php echo "<h1>Kategórie</h1>"; ?>
-  </header>
-  
-  <nav><?php
-    if (isset ($_GET["pr"])) {  
-      echo "<a href='pretek.php?id=". $_GET["pr"] ."'>Späť</a>";
-    }
-    else {
-      echo "<a href='admin.php'>Späť</a>";
-    }  
-    ?>
-  </nav> 
+<?php
+if (!isset($_SESSION['admin']) || !$_SESSION['admin']){
+  echo '<META HTTP-EQUIV="refresh" CONTENT="0;URL=index.php">';
+}else{
+hlavicka("Kateórie");
+?> 
   
 <section>
  
@@ -182,5 +165,8 @@ if ($zobraz_form) {
 
   </script> 
   
-  </body>
-  </html>
+<?php
+paticka();
+}
+?>
+</html>
