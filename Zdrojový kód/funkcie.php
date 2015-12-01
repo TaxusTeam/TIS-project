@@ -435,7 +435,7 @@ if (isset($_GET['odhlas'])){
     <h1><?php echo $meno?></h1>
     <nav>
     <a href="index.php">Domov</a>
-    <a href="#">Členovia klubu</a>
+    <a href="zoznam_pouzivatelov.php">Členovia klubu</a>
       <?php
     if (isset($_SESSION["admin"]) && $_SESSION["admin"]){
             ?>  <a href="?odhlas=1">Odhlásenie</a> <?php

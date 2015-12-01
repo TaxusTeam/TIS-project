@@ -69,7 +69,7 @@ $po = new POUZIVATELIA();
 
 if (isset ($_POST['posli'])&&over($_POST['meno'])&&over($_POST['priezvisko'])){ 
 
-   $id_novy=$po->pridaj_pouzivatela ($_POST['meno'], $_POST['priezvisko'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'],"");
+   $id_novy=$po->pridaj_pouzivatela ($_POST['meno'], $_POST['priezvisko'],"", $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'],"");
    if ($id_novy>-1 && isset($_POST['kategoria']) && $_POST['kategoria']!='-'){
     echo ":)";
     PRETEKY::prihlas_na_pretek($_GET["id"], $id_novy,$_POST['kategoria']);

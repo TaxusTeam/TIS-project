@@ -2,70 +2,15 @@
 include('funkcie.php');
 include('pouzivatelia.php');
 include('preteky.php');
-
-$po = new POUZIVATELIA();
-?>
-
-<!DOCTYPE HTML>
-
-<html>
-
-<?php hlavicka("Členovia klubu");?>
-  
-<section id="vsetci_pouzivatelia"> 
-  <form method="post">
-    <h2>Zoznam používateľov</h2>
-    <table border="1">
-      <tr> 
-        <td class="prvy"></td>
-        <td class="prvy">ID</td>
-        <td class="prvy">Meno</td> 
-        <td class="prvy">Priezvisko</td>
-        <td class="prvy">Osobné číslo</td>
-        <td class="prvy">Čip</td>
-        <td class="prvy">Poznámka</td>
-        <td class="prvy">Akcia</td>
-        <td class="prvy">Platby</td>
-      </tr>
-        <?php
-        $po->vypis_zoznam_admin();
-        ?>
-    </table> 
-
-    
-   <p> 
-    <input name="del" type="submit" id="del" onclick="return confirm('Naozaj chcete vymazať používateľa?');" value="Vymazať používateľa"> <!-- aj v admine kde su vsetci pouzivatelia-->
-    <input name="novy" type="submit" id="novy" value="Nový používateľ"> <!-- aj v admine kde su vsetci pouzivatelia-->
-   </p>
-  </form>
-  
-  <br>  <br><br><br>
-    
-</section>  
-
-<section>
-<?php 
-
-if (isset($_POST['del']))
-{
-    // PHP throws a fit if we try to loop a non-array
-    if(is_array($_POST['incharge']))
-    {
-         foreach($_POST['incharge'] as $val)
-         {
-            //echo $val . '<br />';
-            $po = new POUZIVATELIA();
-            $po->vymaz_pouzivatela($val);
-            unset($po);
-            echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
-        }
-    }
-}
-
+session_start();
 
 $zobraz_form = false;
 
 $po = new POUZIVATELIA();
+
+if (isset($_POST['del'])&& isset($_POST['id_user'])){
+  POUZIVATELIA::vymaz_pouzivatela($_POST['id_user']);
+}
 
 if (isset ($_POST['novy'])){
     $zobraz_form = true;
@@ -79,27 +24,40 @@ if (isset ($_POST['stop'])){
 if ((isset ($_POST['posli'])) && 
     
     (isset ($_POST['meno'])  && 
-    isset ($_POST['priezvisko']) && 
+    isset ($_POST['priezvisko']) &&
+    isset ($_POST['oddiel']) && 
     isset ($_POST['oscislo']) &&
     isset ($_POST['cip']) && 
     isset ($_POST['poznamka'])) )  { 
 
 
  $zobraz_form = false;
-   $po->pridaj_pouzivatela ($_POST['meno'], $_POST['priezvisko'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'], $_POST['uspech']);
+   $po->pridaj_pouzivatela ($_POST['meno'], $_POST['priezvisko'],$_POST['oddiel'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'], $_POST['uspech']);
   
-  unset($po);
   
-  ?>
-  
-  <?php
-  echo '<META HTTP-EQUIV="refresh" CONTENT="0">';
-  echo '<p class="chyba">Pridane!</p>';  
+    
 }
+?>
 
+<!DOCTYPE HTML>
 
+<html>
 
+<?php hlavicka("Členovia klubu");?>
+  
+<section id="vsetci_pouzivatelia">
+<form method=post>
+  <input type=submit name=novy id=novy value="Pridať člena">
+</form> 
+<?php
+  $po->vypis_zoznam();   
+?>  
+  <br><br>
+    
+</section>  
 
+<section>
+<?php 
 
 //$zobraz_form =true;
 if ($zobraz_form) {
@@ -117,6 +75,22 @@ if ($zobraz_form) {
         <td><label for="priezvisko">Priezvisko</label></td>
 		    <td><input type="text" name="priezvisko" id="priezvisko" size="30" value="<?php echo ""; ?>"></td>
 		</tr>
+    <tr>
+      <td><label for="oddiel">Oddiel</label></td>
+      <td><select name="oddiel">
+      <option value="">-</option>
+      <?php
+      $db = napoj_db();
+      $sql =<<<EOF
+         SELECT * FROM oddiely;
+EOF;
+      $result = $db->query($sql);
+      while($row1 = $result->fetchArray(SQLITE3_ASSOC) ){
+        echo '<option value="'.$row1['id'].'">'.$row1['nazov'].'</option>';
+      }
+      ?>
+      </select></td>
+    </tr>
     <tr>
 		    <td><label for="oscislo">Osobne číslo</label></td>
 		    <td><input type="text" name="oscislo" id="oscislo" size="30" value="<?php echo ""; ?>"></td>
@@ -148,12 +122,11 @@ if ($zobraz_form) {
   
   
   
-  <br>
-  <footer>
-    <div id="footer">TIS - projekt 2014, Registracny system pre sportovy klub</div>
-  </footer>  
-
-</body>
+  <br><br>
+  <?php 
+  unset($po);
+  paticka();
+  ?>
 
 
 

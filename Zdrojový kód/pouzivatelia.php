@@ -7,6 +7,7 @@ class POUZIVATELIA
   public $id;
   public $meno;
   public $prezvisko;
+  public $oddiel;
   public $os_i_c;
   public $chip;
   public $poznamka;
@@ -17,17 +18,18 @@ class POUZIVATELIA
 
   }
 
-  function nacitaj($id, $meno,$prezvisko,$os_i_c,$chip,$poznamka,$uspech){
+  function nacitaj($id, $meno,$prezvisko,$oddiel,$os_i_c,$chip,$poznamka,$uspech){
     $this->id = $id;
     $this->meno = $meno;   ///////////////////
     $this->priezvisko = $prezvisko;
+    $this->oddiel = $oddiel;
     $this->os_i_c = $os_i_c;
     $this->chip = $chip;
     $this->poznamka = $poznamka;
     $this->uspech = stripslashes($uspech);
   }
 
-  function pridaj_pouzivatela($meno,$prezvisko,$os_i_c,$chip,$poznamka,$uspech){
+  function pridaj_pouzivatela($meno,$prezvisko,$oddiel,$os_i_c,$chip,$poznamka,$uspech){
     $meno2 = $meno;
     $prezvisko2 = $prezvisko;
     $os_i_c2 = $os_i_c;
@@ -39,8 +41,8 @@ class POUZIVATELIA
     
    $sql =<<<EOF
       INSERT INTO POUZIVATELIA (
-         MENO,PRIEZVISKO,OS_I_C,CHIP,POZNAMKA,USPECH)
-      VALUES ("$meno2", "$prezvisko2", "$os_i_c2", "$chip2", "$poznamka2","$uspech2");
+         MENO,PRIEZVISKO,ID_ODDIEL,OS_I_C,CHIP,POZNAMKA,USPECH)
+      VALUES ("$meno2", "$prezvisko2","$oddiel", "$os_i_c2", "$chip2", "$poznamka2","$uspech2");
 EOF;
 
    $ret = $db->exec($sql);
@@ -75,7 +77,7 @@ if(is_numeric($ID)){
       
       while($row = $ret->fetchArray(SQLITE3_ASSOC)){
         $p = new self();
-        $p->nacitaj($row['ID'], $row['MENO'], $row['PRIEZVISKO'], $row['OS_I_C'], $row['CHIP'], $row['POZNAMKA'], $row['USPECH']);
+        $p->nacitaj($row['ID'], $row['MENO'], $row['PRIEZVISKO'],$row['ID_ODDIEL'], $row['OS_I_C'], $row['CHIP'], $row['POZNAMKA'], $row['USPECH']);
         return $p;
       }
       $db->close();
@@ -92,43 +94,74 @@ if(is_numeric($ID)){
 
 
 
-static function vypis_zoznam_admin(){
-    $db = napoj_db();
+static function vypis_zoznam(){
+  $db = napoj_db();
 
    $sql =<<<EOF
-      SELECT * from POUZIVATELIA;
+      SELECT * from POUZIVATELIA LEFT JOIN oddiely ON POUZIVATELIA.id_oddiel=oddiely.id ORDER BY oddiely.id IS NULL, oddiely.nazov;;
 EOF;
-
+   $akt_oddiel=".";
    $ret = $db->query($sql);
    while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-      /*echo "ID = ". $row['ID'] ."<br>";
-      echo "MENO = ". $row['MENO'] ."<br>";
-      echo "PRIEZVISKO = ". $row['PRIEZVISKO'] ."<br>";
-      echo "OS_I_C =  ".$row['OS_I_C'] ."<br>";
-      echo "CHIP =  ".$row['CHIP'] ."<br>";
-      echo "POZNAMKA =  ".$row['POZNAMKA'] ."<br><br>";   */
-      
-      echo "<tr>";
-        //echo '<td><input type="checkbox" name="person" value="'. $row['ID'].'"></td>';
-        echo '<td><input type="checkbox" name="incharge[]" value="'.$row['ID'].'"/></td>';
-        echo "<td>".$row['ID']."</td>";
-        echo "<td><a class='fntbl' href='profil.php?id=".$row['ID']."'>".$row['MENO']."</a></td>";
-        echo "<td><a class='fntbl' href='profil.php?id=".$row['ID']."'>".$row['PRIEZVISKO']."</a></td>";
-        echo "<td>".$row['OS_I_C']."</td>";
-        echo "<td>".$row['CHIP']."</td>";
-        echo "<td>".$row['POZNAMKA']."</td>";
-        //echo "<td><input type=\"checkbox\" name=\"".$row['ID']."\" value=\"".$row['ID']."\"></td></tr>";
-        echo "<td>
-        <a href='uprav.php?id=".$row['ID']."'>Uprav</a></td>";
-        echo "<td>
-        <a href='platba.php?id=".$row['ID']."'>Platby</a></td></tr> ";
-
-        
+      if ($akt_oddiel!=$row['nazov']){
+        $akt_oddiel=$row['nazov'];
+        if($akt_oddiel==""){
+          echo "<h2>Bez oddielu</h2>";
+        } else {
+          echo "<h2>".$akt_oddiel."</h2>";
+        }
+      }
+      POUZIVATELIA::vypis_profil($row);        
    }
    //echo "Operation done successfully"."<br>";
    $db->close();
 
   }
+  
+static function vypis_profil($pouz){
+  ?>
+  <div class="profil_ram">
+    <p><strong><?php echo $pouz['MENO']." ".$pouz['PRIEZVISKO']?></strong></p>
+    <div class="foto_ram">
+    <?php
+      if(file_exists('pictures/'.$pouz['ID'].'.gif')){
+        $subor = 'pictures/' . $pouz['ID'] .'.gif';
+      }else if(file_exists('pictures/'.$pouz['ID'].'.png')){
+        $subor = 'pictures/' . $pouz['ID'] .'.png';
+      }else if(file_exists('pictures/'.$pouz['ID'].'.jpg')){
+        $subor = 'pictures/' . $pouz['ID'] .'.jpg';
+      }else if(file_exists('pictures/'.$pouz['ID'].'.jpeg')){
+        $subor = 'pictures/' . $pouz['ID'] .'.jpeg';
+      }else {
+        $subor = 'pictures/no_photo.jpg';
+      } 
+    ?>
+      <a href="<?php echo $subor;?>"><img src="<?php echo $subor;?>"></a>
+    </div>
+    
+    <?php
+    if ($pouz['nazov']!=""){
+      echo "<p>Oddiel: ".$pouz['nazov']."</p>";
+    }?>
+    <p>Osobné identifikačné číslo: <?php echo $pouz['OS_I_C']?></p>
+    <p>Čip: <?php echo $pouz['OS_I_C']?></p>
+    <p>Poznámka: <?php echo $pouz['POZNAMKA']?></p>
+    <p>Úspechy: <?php echo $pouz['USPECH']?></p>
+    <p><a href="#?id=<?php echo $pouz['ID']?>">Osobné výkony</a></p>
+    <p><a href="uprav.php?id=<?php echo $pouz['ID']?>">Uprav</a></p>
+    <?php
+    if (isset($_SESSION['admin'])&&$_SESSION['admin']){
+    ?>
+      <form method=post>
+        <input type=hidden name='id_user' value='<?php echo $pouz['ID']?>'>
+        <input type=submit id="del" name='del' value="Vymaž člena" onclick="return confirm('Naozaj chcete vymazať používateľa?');">
+      </form>
+    <?php
+    }
+    ?>
+  </div>
+  <?php  
+}
 
 static function vymaz_pouzivatela($ID){
   $db = napoj_db();
@@ -149,7 +182,7 @@ EOF;
 
 }
 
-function uprav_pouzivatela ($MENO, $PRIEZVISKO, $OS_I_C, $CHIP, $POZNAMKA, $uspech){
+function uprav_pouzivatela ($MENO, $PRIEZVISKO, $oddiel, $OS_I_C, $CHIP, $POZNAMKA, $uspech){
     $db = napoj_db();
     $MENO2 = $MENO;
     $PRIEZVISKO2 = $PRIEZVISKO;
@@ -160,6 +193,7 @@ function uprav_pouzivatela ($MENO, $PRIEZVISKO, $OS_I_C, $CHIP, $POZNAMKA, $uspe
     $sql =<<<EOF
        UPDATE POUZIVATELIA set MENO = "$MENO2" where ID="$this->id";
        UPDATE POUZIVATELIA set PRIEZVISKO = "$PRIEZVISKO2" where ID="$this->id";
+       UPDATE POUZIVATELIA set ID_ODDIEL = "$oddiel" where ID="$this->id";
        UPDATE POUZIVATELIA set OS_I_C = "$OS_I_C2" where ID="$this->id";
        UPDATE POUZIVATELIA set CHIP = "$CHIP2" where ID="$this->id";
        UPDATE POUZIVATELIA set POZNAMKA = "$POZNAMKA2" where ID="$this->id";

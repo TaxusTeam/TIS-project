@@ -401,6 +401,8 @@ EOF;
    $ret = $db->query($sql);
    while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
     $d1 = $row['DEADLINE'];
+    $d2 = $row['DATUM'];
+    $d3 = new DateTime(date("Y-m-d H:i:s"));
     
     if(strtotime($d1) < strtotime('1 days') && strtotime($d1) > strtotime('0 days')){
     echo "<tr><td class='red'><a href='pretek.php?id=".$row['ID']."'>".$row['NAZOV']."</a></td>";
@@ -414,9 +416,13 @@ EOF;
     echo "<td>".$row['DATUM']."</td>";
     echo "<td>".$row['DEADLINE']."</td>";
     //echo "<td><a href='uprav_preteky.php?id=".$row['ID']."'>Uprav</a></td>";
+    if(new DateTime($d2) < $d3){
+      ?>
+      <td><a href='#?id="<?php echo $row['ID']?>"'>Osobný výkon</a></td>
+      <td><a href='#?id="<?php echo $row['ID']?>"'>Celkové hodnotenie</a></td>
+      <?php
+    }
     echo "</tr>";
-    
-    
    }
    //echo "Operation done successfully"."<br>";   ////////////////////////////////
    $db->close();
@@ -434,6 +440,8 @@ EOF;
    $ret = $db->query($sql);
    while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
     $d1 = $row['DEADLINE'];
+    $d2 = $row['DATUM'];
+    $d3 = new DateTime(date("Y-m-d H:i:s"));
     if(strtotime($d1) < strtotime('1 days') && strtotime($d1) > strtotime('0 days')){
     echo "<tr><td class = 'red'><a href='pretek.php?id=".$row['ID']."&amp;ad=1'>".$row['NAZOV']."</a></td>";
   }
@@ -446,8 +454,14 @@ EOF;
     echo "<td>".$row['DATUM']."</td>";
     echo "<td>".$row['DEADLINE']."</td>";
     echo "<td><a href='uprav_preteky.php?id=".$row['ID']."'>Uprav</a></td>";
+     
+    if(new DateTime($d2) < $d3){
+      ?>
+      <td><a href='#?id="<?php echo $row['ID']?>"'>Osobný výkon</a></td>
+      <td><a href='#?id="<?php echo $row['ID']?>"'>Celkové hodnotenie</a></td>
+      <?php
+    }
     echo "</tr>";
-    
     
    }
    //echo "Operation done successfully"."<br>";   ////////////////////////////////

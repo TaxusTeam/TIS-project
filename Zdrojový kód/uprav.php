@@ -38,7 +38,7 @@ if ((isset ($_POST['posli'])) &&
     over ($_POST['meno'])  &&
     over ($_POST['priezvisko']) )  { 
 
-  $po->uprav_pouzivatela ($_POST['meno'], $_POST['priezvisko'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'], $_POST['uspech']);
+  $po->uprav_pouzivatela ($_POST['meno'], $_POST['priezvisko'], $_POST['oddiel'], $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'], $_POST['uspech']);
 
  
   unset($po);
@@ -74,7 +74,6 @@ if ((isset ($_POST['posli'])) &&
   
 <?php 
  
-
 if ($zobraz_form) {
 ?>
 <div id="f">
@@ -90,6 +89,31 @@ if ($zobraz_form) {
         <td><label for="priezvisko">Priezvisko</label></td>
 		    <td><input type="text" name="priezvisko" id="priezvisko" size="30" value="<?php if(isset($_POST['priezvisko'])){echo $_POST['priezvisko'];}else{echo $po->priezvisko;} ?>"></td>
 		</tr>
+    <tr>
+      <td><label for="oddiel">Oddiel</label></td>
+      <td><select name="oddiel">
+      <option value="">-</option>
+      <?php
+      $db = napoj_db();
+      $sql =<<<EOF
+         SELECT * FROM oddiely;
+EOF;
+      $result = $db->query($sql);
+      while($row1 = $result->fetchArray(SQLITE3_ASSOC) ){
+        echo '<option value="'.$row1['id'].'"';
+        if (isset($_POST['oddiel'])){
+          if ($_POST['oddiel']==$row1['id']){
+            echo 'selected';
+          }  
+        }else if ($po->oddiel==$row1['id']){
+          echo 'selected';
+        }
+        echo '>'.$row1['nazov'].'</option>';
+
+      }
+      ?>
+      </select></td>
+    </tr>
     <tr>
 		    <td><label for="oscislo">Osobné číslo</label> </td>
 		    <td><input type="text" name="oscislo" id="oscislo" size="30" value="<?php if(isset($_POST['oscislo'])){echo $_POST['oscislo'];}else{echo $po->os_i_c;} ?>"> </td>
