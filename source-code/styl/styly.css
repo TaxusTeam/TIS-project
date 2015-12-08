@@ -92,7 +92,6 @@ footer {
     font-size: 10px;
 }
 #prihlasenieAdministratora{
-	top:150px;
 	width: 30%;
     margin: auto;
 	position: relative;
@@ -106,6 +105,27 @@ footer {
 #prihlasenieAdministratora td{
 	border: none;
 	padding: 5px;
+}
+/*---Spravovanie vykonu---*/
+.spravaVykonu{
+	width: 35%;
+	margin: auto;
+	position: relative;
+	font-size: small;
+}
+.spravaVykonu table{
+	border: none;
+	padding: 10px;
+}
+.spravaVykonu td{
+	border: none;
+	padding: 5px;
+}
+.table-left{
+	text-align: right;
+}
+.table-right{
+	text-align: left;
 }
 
 #zoz_pretekov_uzivatel{
