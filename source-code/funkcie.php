@@ -455,7 +455,6 @@ if (isset($_GET['odhlas'])){
 
 function paticka(){
     ?>
-
     
   <footer>
     <div id="footer">TIS - projekt 2015, Registračný systém pre športový klub</div>
