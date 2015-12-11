@@ -418,8 +418,8 @@ EOF;
     //echo "<td><a href='uprav_preteky.php?id=".$row['ID']."'>Uprav</a></td>";
     if(new DateTime($d2) < $d3){
       ?>
-      <td><a href='#?id="<?php echo $row['ID']?>"'>Osobný výkon</a></td>
-      <td><a href='#?id="<?php echo $row['ID']?>"'>Celkové hodnotenie</a></td>
+      <td><a href='#?id=<?php echo $row['ID']?>'>Osobný výkon</a></td>
+      <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
       <?php
     }
     echo "</tr>";
@@ -457,8 +457,8 @@ EOF;
      
     if(new DateTime($d2) < $d3){
       ?>
-      <td><a href='#?id="<?php echo $row['ID']?>"'>Osobný výkon</a></td>
-      <td><a href='#?id="<?php echo $row['ID']?>"'>Celkové hodnotenie</a></td>
+      <td><a href='#?id=<?php echo $row['ID']?>'>Osobný výkon</a></td>
+      <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
       <?php
     }
     echo "</tr>";
@@ -703,6 +703,89 @@ EOF;
     }
 
     $db->close();
+}
+
+static function zapis_cas($ID_PRET,$ID_POUZ,$cas){
+    $db = napoj_db();
+    $sql =<<<EOF
+      INSERT INTO ZHODNOTENIE (ID_PRET,ID_POUZ,CAS) VALUES ("$ID_PRET","$ID_POUZ","$cas");
+EOF;
+
+  $db->exec($sql);
+  $db->close();
+}
+
+static function uprav_cas($ID_PRET,$ID,$cas){
+    $db = napoj_db();
+    $sql =<<<EOF
+      UPDATE ZHODNOTENIE set CAS = "$cas" WHERE ID_ZHOD = $ID;
+EOF;
+
+  $db->exec($sql);
+  $db->close();
+}
+
+static function exportuj_zhodnotenie($id){
+  $db = napoj_db();
+    $sql =<<<EOF
+      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $id ORDER BY ZHODNOTENIE.CAS ASC;
+EOF;
+  $ret = $db->query($sql);
+  $myfile = fopen("zhodnotenie.csv", "w") or die("Unable to open file!");
+    fputcsv($myfile, array("MENO","PRIEZVISKO","CAS"), ";");
+    while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
+      fputcsv($myfile,array($row['MENO'],$row['PRIEZVISKO'],$row['CAS']),";");
+    }
+  echo '<meta http-equiv="refresh" content="0;URL=zhodnotenie.csv" />';
+}
+
+static function vypis_zhodnotenie($ID_PRET){
+  $db = napoj_db();
+    $sql =<<<EOF
+      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $ID_PRET ORDER BY ZHODNOTENIE.CAS ASC;
+EOF;
+
+  $ret = $db->query($sql);
+  while ($row = $ret->fetchArray(SQLITE3_ASSOC)){
+    ?>
+    <tr><td><?php echo $row["MENO"] ?></td><td><?php echo $row["PRIEZVISKO"] ?></td><td><?php echo $row["CAS"] ?></td></tr>
+    <?php
+  }
+  if (isset($_SESSION["admin"]) && $_SESSION["admin"]){
+    echo '<tr><td><form method="post"><input type="submit" name="export" value="Exportovať"></form></td><td></td><td><form method="post"><input type="submit" name="upravuj" value="Uprav"></form></td></tr>';
+  }
+  $db->close();
+}
+
+static function vypis_zhodnotenie_admin($ID_PRET){
+  $db = napoj_db();
+    $sql =<<<EOF
+      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $ID_PRET ORDER BY ZHODNOTENIE.CAS ASC;
+EOF;
+
+  $ret = $db->query($sql);
+  $i = 0;
+  while($row = $ret->fetchArray(SQLITE3_ASSOC)){
+    echo "<tr>";
+  
+    echo "<td>".$row['MENO']."</td>";  
+
+    echo "<td>".$row['PRIEZVISKO']."</td>";
+
+    echo '<td><input type="text" name="cas'.$i.'" value = "';
+    if (isset($_POST["cas".$i])){
+      echo $_POST["cas".$i];
+    } else{
+      echo $row["CAS"];
+    }
+    echo '" required/><input type="hidden" name="id'.$i.'" value="'.$row["ID_ZHOD"].'"/></td>';
+        
+    echo "</tr>";
+
+    $i++;
+  }
+  echo '<tr><td></td><td></td><td><input type="submit" name="uprav" value="Ulož zmeny"><input type="hidden" name="pocet" value="'.$i.'"></td></tr>';
+  $db->close();
 }
 
 static function odstran_duplicity(){

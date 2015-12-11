@@ -23,11 +23,11 @@ if (isset($_POST['prihlas']))
             
             if($val!="-"){
               if ($cookies!=""){$cookies.="#";}
-              $cookies.=$val;
               
               $pieces = explode(":", $val);
               $i=$pieces[1];
               $j=$pieces[0];
+              $cookies.=$i;
               PRETEKY::prihlas_na_pretek($_GET["id"], $i, $j);
             }
         }

@@ -12,7 +12,7 @@ session_start();
 <?php
 hlavicka("Prihlásenie administrátora");
 
-if (isset($_POST['heslo'])&&$_POST['heslo']=="olympiada"){
+if (isset($_POST['heslo'])&&$_POST['heslo']==$heslo){
   $_SESSION['admin']=1;
   echo "<META http-equiv='refresh' content='0;URL=index.php'>";
 }else{

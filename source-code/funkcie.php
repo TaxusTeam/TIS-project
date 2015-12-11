@@ -1,4 +1,5 @@
 <?php 
+$heslo="olympiada";
 date_default_timezone_set('UTC');
 class MyDB extends SQLite3
    {
