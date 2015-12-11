@@ -140,7 +140,7 @@ footer {
 	font-size: small;
 }
 #zoz_pretekov_uzivatel table{ border-width: 1px; 	padding: 10px; }
-#zoz_pretekov_uzivatel a{ text-decoration: none; color:#4169e1; }
+#zoz_pretekov_uzivatel a{ text-decoration: none; }
 #zoz_pretekov_uzivatel a:hover{color:#003c75; }
 #zoz_pretekov_uzivatel td{
 	border-left: 0px;
@@ -284,6 +284,20 @@ form {
 #zhodnotenie_table{
   margin:auto;
   margin-top:20px;
+}
+
+.ZC_nadpis{
+  border-top:solid 3px green;
+  border-bottom:solid 3px green;
+}
+.green{
+  color:green;
+}
+.red{
+  color:red;
+}
+.grey{
+  color:grey;
 }
 
 /*-------------------------------- vsetci_pouzivatelia.php, platby.php --------------------------------*/

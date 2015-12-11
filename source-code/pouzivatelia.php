@@ -106,9 +106,9 @@ EOF;
       if ($akt_oddiel!=$row['nazov']){
         $akt_oddiel=$row['nazov'];
         if($akt_oddiel==""){
-          echo "<h2>Bez oddielu</h2>";
+          echo "<h2 class=ZC_nadpis>Bez oddielu</h2>";
         } else {
-          echo "<h2>".$akt_oddiel."</h2>";
+          echo "<h2 class=ZC_nadpis>".$akt_oddiel."</h2>";
         }
       }
       POUZIVATELIA::vypis_profil($row);        

@@ -419,6 +419,7 @@ function over($text){
 function hlavicka($meno=""){
 if (isset($_GET['odhlas'])){
   $_SESSION['admin']=0;
+  echo '<meta http-equiv="refresh" content="0; URL=index.php">';
 }
 ?>
 <head>

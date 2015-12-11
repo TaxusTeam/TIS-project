@@ -405,13 +405,13 @@ EOF;
     $d3 = new DateTime(date("Y-m-d H:i:s"));
     
     if(strtotime($d1) < strtotime('1 days') && strtotime($d1) > strtotime('0 days')){
-    echo "<tr><td class='red'><a href='pretek.php?id=".$row['ID']."'>".$row['NAZOV']."</a></td>";
+    echo "<tr><td><a href='pretek.php?id=".$row['ID']."' class='red'>".$row['NAZOV']."</a></td>";
   }
     if(strtotime($d1) < strtotime('0 days')){
-    echo "<tr><td class='grey'><a href='pretek.php?id=".$row['ID']."'>".$row['NAZOV']."</a></td>";
+    echo "<tr><td><a href='pretek.php?id=".$row['ID']."' class='grey'>".$row['NAZOV']."</a></td>";
   }
   if(strtotime($d1) > strtotime('1 days')){
-    echo "<tr><td class='green'><a href='pretek.php?id=".$row['ID']."'>".$row['NAZOV']."</a></td>";
+    echo "<tr><td><a href='pretek.php?id=".$row['ID']."' class='green'>".$row['NAZOV']."</a></td>";
   }
     echo "<td>".$row['DATUM']."</td>";
     echo "<td>".$row['DEADLINE']."</td>";
@@ -443,13 +443,13 @@ EOF;
     $d2 = $row['DATUM'];
     $d3 = new DateTime(date("Y-m-d H:i:s"));
     if(strtotime($d1) < strtotime('1 days') && strtotime($d1) > strtotime('0 days')){
-    echo "<tr><td class = 'red'><a href='pretek.php?id=".$row['ID']."&amp;ad=1'>".$row['NAZOV']."</a></td>";
+    echo "<tr><td><a href='pretek.php?id=".$row['ID']."&amp;ad=1' class = 'red'>".$row['NAZOV']."</a></td>";
   }
   if(strtotime($d1) < strtotime('0 days')){
-    echo "<tr><td class = 'grey'><a href='pretek.php?id=".$row['ID']."&amp;ad=1'>".$row['NAZOV']."</a></td>";
+    echo "<tr><td><a href='pretek.php?id=".$row['ID']."&amp;ad=1' class = 'grey'>".$row['NAZOV']."</a></td>";
   }
   if(strtotime($d1) > strtotime('1 days')){
-    echo "<tr><td class = 'green'><a href='pretek.php?id=".$row['ID']."&amp;ad=1'>".$row['NAZOV']."</a></td>";
+    echo "<tr><td><a href='pretek.php?id=".$row['ID']."&amp;ad=1' class = 'green'>".$row['NAZOV']."</a></td>";
   }
     echo "<td>".$row['DATUM']."</td>";
     echo "<td>".$row['DEADLINE']."</td>";
