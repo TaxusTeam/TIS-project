@@ -120,7 +120,7 @@ EOF;
   
 static function vypis_profil($pouz){
   ?>
-  <div class="profil_ram">
+  <div class="profil_ram" border=1>
     <p><strong><?php echo $pouz['MENO']." ".$pouz['PRIEZVISKO']?></strong></p>
     <div class="foto_ram">
     <?php

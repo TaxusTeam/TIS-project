@@ -115,7 +115,7 @@ if(isset($_POST['skry'])){
   hlavicka($pr->NAZOV);
   unset($pr);
 ?>
-<section> 
+<section id=pretekSection> 
     
 
     <?php

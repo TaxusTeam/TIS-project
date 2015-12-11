@@ -40,8 +40,8 @@ if ($row["POCET"] <= 0){
 	} else{
 
 ?>
-<section> 
-<form method="post">
+<section id="zhodnotenie_table"> 
+<form method="post" >
 <?php
 $db = napoj_db();
 $sql =<<<EOF
@@ -49,7 +49,7 @@ $sql =<<<EOF
 EOF;
 $ret = $db->query($sql);
 $i = 0;
-echo "<table><tr><th>Meno</th><th>Priezvisko</th><th>Čas</th></tr>";
+echo "<table id='zhodnotenie_table'><tr><th>Meno</th><th>Priezvisko</th><th>Čas</th></tr>";
 while($row = $ret->fetchArray(SQLITE3_ASSOC)){
   echo "<tr>";
   
@@ -77,7 +77,7 @@ echo "</table>";
   } else{
   	?>
   	<section>
-  	<table>
+  	<table id="zhodnotenie_table">
   	<tr><th>Meno</th><th>Priezvisko</th><th>Čas</th></tr>
   	<?php
   	

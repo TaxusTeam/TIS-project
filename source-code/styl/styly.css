@@ -67,6 +67,10 @@ section{
 	height: 100%;
 	width: 100%;
 	margin-bottom: 40px;
+
+}
+
+#pretekSection{
 	overflow: auto;
 }
 
@@ -272,10 +276,20 @@ form {
 }
 #f td{ padding: 5px;}
 
+.profil_ram{
+  border: none;
+  border-bottom:solid 1px gray;
+}
+
+#zhodnotenie_table{
+  margin:auto;
+  margin-top:20px;
+}
+
 /*-------------------------------- vsetci_pouzivatelia.php, platby.php --------------------------------*/
 
 #vsetci_pouzivatelia, #tab_platby{
-	top:150px;
+	top:20px;
 	width: 80%;
 	position: relative;
 	left: 10%;
