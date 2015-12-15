@@ -418,7 +418,7 @@ EOF;
     //echo "<td><a href='uprav_preteky.php?id=".$row['ID']."'>Uprav</a></td>";
     if(new DateTime($d2) < $d3){
       ?>
-        <td><a href='sprava.php?id=<?php echo $row['ID'];?>'>Osobný výkon</a></td>
+        <td><a href='vykon.php?id=<?php echo $row['ID'];?>'>Osobný výkon</a></td>
         <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
       <?php
     }
@@ -457,7 +457,7 @@ EOF;
      
     if(new DateTime($d2) < $d3){
       ?>
-        <td><a href='sprava.php?id=<?php echo $row['ID'];?>'>Osobný výkon</a></td>
+        <td><a href='vykon.php?id=<?php echo $row['ID'];?>'>Osobný výkon</a></td>
         <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
       <?php
     }

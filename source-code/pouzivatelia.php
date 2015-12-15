@@ -147,7 +147,7 @@ static function vypis_profil($pouz){
     <p>Čip: <?php echo $pouz['OS_I_C']?></p>
     <p>Poznámka: <?php echo $pouz['POZNAMKA']?></p>
     <p>Úspechy: <?php echo $pouz['USPECH']?></p>
-    <p><a href="#?id=<?php echo $pouz['ID']?>">Osobné výkony</a></p>
+    <p><a href="tabulka_vykonov.php?id=<?php echo $pouz['ID']?>">Osobné výkony</a></p>
     <p><a href="uprav.php?id=<?php echo $pouz['ID']?>">Uprav</a></p>
     <?php
     if (isset($_SESSION['admin'])&&$_SESSION['admin']){

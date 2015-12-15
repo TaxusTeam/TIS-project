@@ -13,8 +13,8 @@ session_start();
 hlavicka("Spravovanie výkonu");
 
 
-if(isset($_POST["uloz"])){
-    echo "<h4 align='center'>".vloz_vykon()."</h4>";
+if(isset($_POST["uloz"]) && isset($_POST["ID_LOG"])){
+    echo "<a href='tabulka_vykonov.php?id=".$_POST["ID_LOG"]."'><h4 align='center'>".vloz_vykon()."</h4></a>";
 }
 ?>
 <form method=POST>
@@ -35,7 +35,7 @@ if(isset($_POST["uloz"])){
             </tr>
             <tr>
                 <td class="table-left"><label>Miesto:</label></td>
-                <td class="table-right"><input type="text" name="MIESTO" id="MIESTO" <?php if(isset($_POST["uloz"])){}?> ></td>
+                <td class="table-right"><input type="text" name="MIESTO" id="MIESTO" ></td>
             </tr>
             <tr>
                 <td class="table-left"><label>Víťaz:</label></td>
@@ -104,7 +104,10 @@ function prihlaseni_pouz_na_preteky($id_preteku){
       SELECT
         ID_POUZ, PRIEZVISKO, MENO FROM PRIHLASENY
         JOIN POUZIVATELIA ON PRIHLASENY.ID_POUZ = POUZIVATELIA.ID
-        WHERE PRIHLASENY.ID_PRET = "$id_preteku";
+        LEFT JOIN VYKON ON PRIHLASENY.ID_POUZ = VYKON.ID_LOG
+        AND PRIHLASENY.ID_PRET = VYKON.ID_PRET
+        WHERE PRIHLASENY.ID_PRET = "$id_preteku"
+        AND ID_VYKON IS NULL;
 EOF;
 
         $ret = $db->query($sql);
@@ -126,7 +129,9 @@ function vloz_vykon(){
 
 
     if($db){
+        $ID_PRET = $_GET['id'];
         $ID_LOG = $_POST["ID_LOG"];
+
         $MIESTO = $_POST["MIESTO"];
         $VITAZ = $_POST["VITAZ"];
         $VITAZ_CAS = $_POST["VITAZ_CAS"];
@@ -141,18 +146,22 @@ function vloz_vykon(){
         //echo $db->lastErrorMsg();
         $sql =<<<EOF
       INSERT INTO `VYKON`
-      (`ID_VYKON`,`ID_LOG`,`MIESTO`,`VITAZ`,`VITAZ_CAS`,`MOJ_CAS`,`VZDIALENOST`,
+      (`ID_PRET`,`ID_LOG`,`MIESTO`,`VITAZ`,`VITAZ_CAS`,`MOJ_CAS`,`VZDIALENOST`,
       `IDEAL_VZDIALENOST`,`RYCHLOST`,`PREVYSENIE`,`ODCHYLKA`,`PRIRAZKA`,`HODNOTENIE`)
-      VALUES (NULL,"$ID_LOG","$MIESTO","$VITAZ","$VITAZ_CAS",
+      VALUES ("$ID_PRET","$ID_LOG","$MIESTO","$VITAZ","$VITAZ_CAS",
       "$MOJ_CAS","$VZDIALENOST","$IDEAL_VZDIALENOST","$RYCHLOST",
       "$PREVYSENIE","$ODCHYLKA","$PRIRAZKA","$HODNOTENIE");
-;
+
 EOF;
 
-        $ret = $db->query($sql);
+
+
+        $ret = $db->exec($sql);
         $db->close();
-        return $ret;
-        return "Výkon úspešne pridaný";
+        if($ret){
+            return "Výkon úspešne pridaný (zobraz)";
+        }
+        return "Nastala chyba";
     } else {
         $db->close();
         return "Nastal problém s databázou";
