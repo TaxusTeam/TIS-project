@@ -143,13 +143,15 @@ function vloz_vykon(){
       INSERT INTO `VYKON`
       (`ID_VYKON`,`ID_LOG`,`MIESTO`,`VITAZ`,`VITAZ_CAS`,`MOJ_CAS`,`VZDIALENOST`,
       `IDEAL_VZDIALENOST`,`RYCHLOST`,`PREVYSENIE`,`ODCHYLKA`,`PRIRAZKA`,`HODNOTENIE`)
-      VALUES (NULL,"$ID_LOG","$MIESTO","$VITAZ","$VITAZ_CAS","$MOJ_CAS","$VZDIALENOST","$IDEAL_VZDIALENOST",
-      "$RYCHLOST","$PREVYSENIE","$ODCHYLKA","$PRIRAZKA","$HODNOTENIE");
+      VALUES (NULL,"$ID_LOG","$MIESTO","$VITAZ","$VITAZ_CAS",
+      "$MOJ_CAS","$VZDIALENOST","$IDEAL_VZDIALENOST","$RYCHLOST",
+      "$PREVYSENIE","$ODCHYLKA","$PRIRAZKA","$HODNOTENIE");
 ;
 EOF;
 
         $ret = $db->query($sql);
         $db->close();
+        return $ret;
         return "Výkon úspešne pridaný";
     } else {
         $db->close();
