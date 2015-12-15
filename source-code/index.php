@@ -80,15 +80,15 @@ if ($zobraz_form) {
 	 <table>
 		<tr>
       <td><label for="nazov">Názov pretekov</label></td>
-		  <td><input type="text" name="nazov" id="nazov" size="30" value="<?php echo ""; ?>"> </td>
+		  <td><input type="text" name="nazov" id="nazov" size="30" value=""> </td>
 		</tr>
     <tr>
 		  <td><label for="datum">Dátum konania</label>  </td>
-		  <td><input type="text" name="datum" id="datetimepicker1" size="30" value="<?php echo ""; ?>"></td>
+		  <td><input type="text" name="datum" id="datetimepicker1" size="30" value=""></td>
 		</tr>
     <tr>
       <td><label for="deadline">Deadline prihlásenia</label>    </td>
-		  <td><input type="text" name="deadline" id="datetimepicker2" size="30" value="<?php echo ""; ?>"> </td>
+		  <td><input type="text" name="deadline" id="datetimepicker2" size="30" value=""> </td>
 		</tr>
 	 </table>
    

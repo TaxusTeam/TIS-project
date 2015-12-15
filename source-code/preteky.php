@@ -418,8 +418,8 @@ EOF;
     //echo "<td><a href='uprav_preteky.php?id=".$row['ID']."'>Uprav</a></td>";
     if(new DateTime($d2) < $d3){
       ?>
-      <td><a href='#?id=<?php echo $row['ID']?>'>Osobný výkon</a></td>
-      <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
+        <td><a href='sprava.php?id=<?php echo $row['ID'];?>'>Osobný výkon</a></td>
+        <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
       <?php
     }
     echo "</tr>";
@@ -457,8 +457,8 @@ EOF;
      
     if(new DateTime($d2) < $d3){
       ?>
-      <td><a href='#?id=<?php echo $row['ID']?>'>Osobný výkon</a></td>
-      <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
+        <td><a href='sprava.php?id=<?php echo $row['ID'];?>'>Osobný výkon</a></td>
+        <td><a href='zhodnotenie.php?id=<?php echo $row['ID']?>'>Celkové hodnotenie</a></td>
       <?php
     }
     echo "</tr>";
