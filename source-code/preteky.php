@@ -158,7 +158,7 @@ public function vypis_prihlasenych_d_chip(){
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, KAT, ID_ODDIEL) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
+          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, ID_ODDIEL, KAT) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
@@ -176,6 +176,7 @@ EOF;
       
       while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
         //echo "<b>".$row['ID'],$row['MENO'],$row['PRIEZVISKO'],$row['OS_I_C'],$row['CHIP'],$row['POZNAMKA']."</b><br>";
+        
         echo "<tr>";
         echo '<td><input type="checkbox" name="incharge[]" value="'.$row['ID'].'"/></td>';
         
@@ -213,7 +214,7 @@ public function vypis_prihlasenych_u_chip(){
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, KAT, ID_ODDIEL) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER
+          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, ID_ODDIEL, KAT ) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER
            JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
 EOF;
 $db->exec($sql);
