@@ -11,7 +11,7 @@ if(isset($_POST['export'])){
 
 }
 
-if (isset($_POST['prihlas'])) 
+if (isset($_POST['prihlas'])&&isset($_POST['incharge'])) 
 {
     
     // PHP throws a fit if we try to loop a non-array
@@ -28,7 +28,12 @@ if (isset($_POST['prihlas']))
               $i=$pieces[1];
               $j=$pieces[0];
               $cookies.=$i;
-              PRETEKY::prihlas_na_pretek($_GET["id"], $i, $j);
+              if (isset($_POST['poznamka'.$i])){
+                $poznamka=$_POST['poznamka'.$i];
+              }else{
+                $poznamka="";
+              }
+              PRETEKY::prihlas_na_pretek($_GET["id"], $i, $j,$poznamka);
             }
         }
         setcookie("posledni_prihlaseni", $cookies, time() + (86400 * 366),"/");
@@ -71,8 +76,7 @@ if (isset ($_POST['posli'])&&over($_POST['meno'])&&over($_POST['priezvisko'])){
 
    $id_novy=$po->pridaj_pouzivatela ($_POST['meno'], $_POST['priezvisko'],"", $_POST['oscislo'], $_POST['cip'], $_POST['poznamka'],"");
    if ($id_novy>-1 && isset($_POST['kategoria']) && $_POST['kategoria']!='-'){
-    echo ":)";
-    PRETEKY::prihlas_na_pretek($_GET["id"], $id_novy,$_POST['kategoria']);
+    PRETEKY::prihlas_na_pretek($_GET["id"], $id_novy,$_POST['kategoria'],$_POST['poznamka']);
     if (isset($_COOKIE['posledni_prihlaseni'])){setcookie("posledni_prihlaseni", $_COOKIE['posledni_prihlaseni']."#".$id_novy, time() + (86400 * 366),"/");}
     else{setcookie("posledni_prihlaseni", $id_novy, time() + (86400 * 366),"/");}
   }
@@ -98,7 +102,7 @@ if(isset($_POST['skry'])){
 <script type="text/javascript">
   $(document).ready(function()
   {
-    $("#myTable").tablesorter();
+    $("#myTable").tablesorter({sortList: [[2,0]]});
   }
 );
   </script>
@@ -171,8 +175,9 @@ if($navodik){
       <thead>
       <tr>
         <th class="prvy"></th>
+        
         <th class="prvy">Meno</th> 
-        <th class="prvy">Priezvisko</th>
+        <th class="prvy" id="priezvisko_button">Priezvisko</th>
         <th class="prvy">Kategória</th>
         <th class="prvy">Osobné číslo</th>
         <th class="prvy">Čip</th>
@@ -222,9 +227,10 @@ if($navodik){
         
         
         <th class="prvy"></th>
+        <th class="prvy">Kategória</th>
         <th class="prvy">Meno</th> 
         <th class="prvy">Priezvisko</th>
-        <th class="prvy">Kategória</th>
+        
         <th class="prvy">Osobné číslo</th>
         <th class="prvy">Čip</th>
         <th class="prvy">Poznámka</th>
@@ -242,9 +248,11 @@ if($navodik){
       </tbody>
     </table>
     <?php if (!isset($_GET['cookies'])){?>
-      <a href=<?php echo "pretek.php?id=".$_GET['id']."&cookies=0"; ?>>Viac používateľov</a>
+      <?php $link="'pretek.php?id=".$_GET['id']."&cookies=0'"; ?>
+      <input onclick="window.location.href =<?php echo $link;?>" type='button' value='Viac používateľov'>
     <?php }else{?>
-      <a href=<?php echo "pretek.php?id=".$_GET['id']; ?>>Menej používateľov</a>
+      <?php $link="'pretek.php?id=".$_GET['id']."'"; ?>
+      <input onclick="window.location.href =<?php echo $link;?>" type='button' value='Menej používateľov'>
     <?php
     } 
     $d1 = new DateTime($pr->DEADLINE);
@@ -298,5 +306,4 @@ if($navodik){
 
 	
 </section>
-
 </html>

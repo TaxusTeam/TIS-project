@@ -41,23 +41,33 @@ function vypis_vykony($id_pouzivatela){
 EOF;
 
         $ret = $db->query($sql);
+
+        $sql =<<<EOF
+    SELECT
+        MENO,PRIEZVISKO FROM POUZIVATELIA WHERE ID = "$id_pouzivatela";
+EOF;
+
+        $ret2 = $db->query($sql);
+        $row=$ret2->fetchArray(SQLITE3_ASSOC);
         ?>
         <div>
-        <table style="width:100%;">
+        <h1 style="text-align:center;"><?php echo $row['MENO']." ".$row['PRIEZVISKO']?></h1>
+        <table style="width:100%;" border=1 class="tabulkaVykonou">
+
             <tr>
-                <td class="prvy">Dátum</td>
-                <td class="prvy">Názov</td>
-                <td class="prvy">Miesto</td>
-                <td class="prvy">Víťaz</td>
-                <td class="prvy">Víťazný čas</td>
-                <td class="prvy">Môj čas</td>
-                <td class="prvy">Vzdialenosť</td>
-                <td class="prvy">Ideálna vzdialenosť</td>
-                <td class="prvy">Rýchlosť</td>
-                <td class="prvy">Prevýšenie</td>
-                <td class="prvy">Odchýlka</td>
-                <td class="prvy">Prirážka</td>
-                <td class="prvy">Hodnotenie</td>
+                <th class="prvy">Dátum</th>
+                <th class="prvy">Názov</th>
+                <th class="prvy">Miesto</th>
+                <th class="prvy">Víťaz</th>
+                <th class="prvy">Víťazný čas</th>
+                <th class="prvy">Môj čas</th>
+                <th class="prvy">Vzdialenosť</th>
+                <th class="prvy">Ideálna vzdialenosť</th>
+                <th class="prvy">Rýchlosť</th>
+                <th class="prvy">Prevýšenie</th>
+                <th class="prvy">Odchýlka</th>
+                <th class="prvy">Prirážka</th>
+                <th class="prvy">Hodnotenie</th>
                 <td></td>
                 <td></td>
             </tr>

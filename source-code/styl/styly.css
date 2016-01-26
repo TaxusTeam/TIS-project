@@ -1,4 +1,18 @@
 /* CSS Document */
+.tabulkaVykonou td:hover{
+	background-color:#161;
+	color:white; 
+}
+
+.tabulkaVykonou th{
+	background-color:#161;
+	color:white; 
+}
+
+.tabulkaVykonou tr:hover{
+	background-color:#5A5;
+}
+
 html,body{
 	height: 100%;
 	width: 100%;
@@ -159,7 +173,7 @@ footer {
 	font-size: large;
 }
 #uprav_preteky td{padding:5px;}
-#buttons{float:right; right: 4%; position: relative;}
+#buttons{float:right; right: 4%; position: relative;margin-bottom: 50px;}
 .chyba{color:green;}
 
 
@@ -213,7 +227,7 @@ form {
 #novy_pouzivatel h2{color: white; padding-left: 40px;}
 
 #upozornenie table.u{
-	color:#ceb000; 
+	color:red; 
 	background-color: #ffffc6; 
 	border-color: #ffe340;
 	border-width: 5px;
@@ -225,10 +239,26 @@ form {
 #upozornenie table.u td{
 	border:0px;
 	background-color: #ffffc6; 
-	color:#eecb00; 
+	color:red; 
 }
-
-
+#navodik,input#skry{
+	margin-left: 2%;
+}
+table.n{
+	color:black; 
+	background-color: rgb(85, 170, 85); 
+	border-color: #161;
+	border-width: 5px;
+	border-style: solid;
+	padding: 10px;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+table.n td{
+	border:0px;
+	background-color: rgb(85, 170, 85); 
+	color:black; 
+}
 /*-------------------------------- uprav.php --------------------------------*/
 
 #profil img{

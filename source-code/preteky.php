@@ -120,15 +120,14 @@ EOF;
 /**
 *odhlasy pouzivatela na pretek
 */
-static function prihlas_na_pretek($ID,$ID_pouz,$kat){
+static function prihlas_na_pretek($ID,$ID_pouz,$kat,$poz){
   $db = napoj_db();
-
     $sql =<<<EOF
       INSERT INTO PRIHLASENY (
-         ID_POUZ,ID_PRET,KAT)
-      VALUES ("$ID_pouz","$ID","$kat");
+         ID_POUZ,ID_PRET,KAT,POZNAMKA)
+      VALUES ("$ID_pouz","$ID","$kat","$poz");
 EOF;
-
+  setcookie('kat_pretekar'.$ID_pouz, $kat, time() + (86400 * 366),"/");
    $ret = $db->exec($sql);
    if(!$ret){
       echo $db->lastErrorMsg();
@@ -153,12 +152,13 @@ public function vypis_prihlasenych_d_chip(){
       POZNAMKA          TEXT,
       USPECH            TEXT,
       KAT               TEXT,
-      ID_ODDIEL         INTEGER
+      ID_ODDIEL         INTEGER,
+      NIC TEXT
       );
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, ID_ODDIEL, KAT) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
+          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, NIC, USPECH, ID_ODDIEL, KAT, POZNAMKA) SELECT POUZIVATELIA.*, PRIHLASENY.KAT, PRIHLASENY.POZNAMKA FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
@@ -180,14 +180,13 @@ EOF;
         echo "<tr>";
         echo '<td><input type="checkbox" name="incharge[]" value="'.$row['ID'].'"/></td>';
         
-        echo "<td class='fnt'><a class='fnt' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'><strong class=upozornenie>".$row['MENO']."</strong></a></td>";      //***********************
-        echo "<td class='fnt'><a class='fnt' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'><strong class=upozornenie>".$row['PRIEZVISKO']."</strong></a></td>";
+        echo "<td class='fnt'><strong class=upozornenie>".$row['MENO']."</strong></td>";      //***********************
+        echo "<td class='fnt'><strong class=upozornenie>".$row['PRIEZVISKO']."</strong></td>";
         echo "<td class='fnt'>".$row['KAT']."</td>";
         echo "<td class='fnt'>".$row['OS_I_C']."</td>";
         echo "<td class='fnt'><strong class=upozornenie>".$row['CHIP']."</strong></td>";
         echo "<td class='fnt'>".$row['POZNAMKA']."</td>";
-        echo "<td>
-        <a class='fntb' href='uprav.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>Uprav</a></td></tr> ";
+        echo "</tr> ";
 
       }
       // echo "Operation done successfully"."<br>";   ///////////////////
@@ -209,12 +208,13 @@ public function vypis_prihlasenych_u_chip(){
       POZNAMKA          TEXT,
       USPECH            TEXT,
       KAT               TEXT,
-      ID_ODDIEL         INTEGER
+      ID_ODDIEL         INTEGER,
+      NIC TEXT
       );
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH, ID_ODDIEL, KAT ) SELECT POUZIVATELIA.*, PRIHLASENY.KAT FROM POUZIVATELIA INNER
+          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, NIC, USPECH, ID_ODDIEL, KAT, POZNAMKA ) SELECT POUZIVATELIA.*, PRIHLASENY.KAT, PRIHLASENY.POZNAMKA FROM POUZIVATELIA INNER
            JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $this->ID);
 EOF;
 $db->exec($sql);
@@ -232,14 +232,13 @@ EOF;
         echo "<tr>";
         echo '<td><input type="checkbox" name="incharge[]" value="'.$row['ID'].'"/></td>';
         
-        echo "<td><a class='fntb' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['MENO']."</a></td>";
-        echo "<td><a class='fntb' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['PRIEZVISKO']."</a></td>";
+        echo "<td>".$row['MENO']."</td>";
+        echo "<td>".$row['PRIEZVISKO']."</td>";
         echo "<td>".$row['KAT']."</td>";
         echo "<td>".$row['OS_I_C']."</td>";
         echo "<td>".$row['CHIP']."</td>";
         echo "<td>".$row['POZNAMKA']."</td>";
-        echo "<td>
-        <a class='fntb' href='uprav.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>Uprav</a></td></tr> ";
+        echo "</tr> ";
 
       }
        // echo "Operation done successfully"."<br>";      ////////////////////////////
@@ -295,19 +294,30 @@ EOF;
       while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
         if ((isset($_GET['cookies'])&&!$_GET['cookies'])||(!isset($_COOKIE['posledni_prihlaseni']) || in_array($row['ID'],$cookiesArray))){
         echo "<tr>";
-        echo '<td><input type="checkbox" name="incharge2[]" value="'.$row['ID'].'"/></td>';                                                    
-        echo "<td><a class='fntb' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['MENO']."</a></td>";
-        echo "<td><a class='fntb' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['PRIEZVISKO']."</a></td>";
+        echo '<td><input type="checkbox" name="incharge2[]" value="'.$row['ID'].'"/></td>'; 
         echo '<td><select name="incharge[]">';
         echo '<option value="-">-</option>';
         while($row1 = $result->fetchArray(SQLITE3_ASSOC) ){
-          echo '<option value="'.$row1['NAZOV'].':'.$row['ID'].'">'.$row1['NAZOV'].'</option>';
+          echo '<option value="'.$row1['NAZOV'].':'.$row['ID'].'" ';
+          if (isset($_COOKIE['kat_pretekar'.$row['ID']]) && $_COOKIE['kat_pretekar'.$row['ID']]==$row1['NAZOV']){
+            echo "selected";
+          }
+          echo '>'.$row1['NAZOV'].'</option>';
 
         }
-        echo "</select></td>";
+        echo "</select></td>";                                                   
+        echo "<td><a class='fntb' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['MENO']."</a></td>";
+        echo "<td><a class='fntb' href='profil.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>".$row['PRIEZVISKO']."</a></td>";
+        
         echo "<td>".$row['OS_I_C']."</td>";
         echo "<td>".$row['CHIP']."</td>";
-        echo "<td>".$row['POZNAMKA']."</td>";
+        echo "<td><input type='text' name=poznamka".$row['ID']." size=10 value='";
+        if (isset($_POST['poznamka'.$row['ID']])){
+          echo $_POST['poznamka'.$row['ID']];
+        }else{
+          echo $row['POZNAMKA'];
+        }
+        echo "'></td>";
         echo "<td>
         <a class='fntb' href='uprav.php?id=".$row['ID']."&amp;pr=".$_GET["id"]."'>Uprav</a></td></tr>";
         
@@ -316,16 +326,17 @@ EOF;
       ?>
         <tr>
           <td><input type="checkbox" name="posli"></td>
-          <td><input type="text" name="meno" id="meno" size="10" value=""></td>
-          <td><input type="text" name="priezvisko" id="priezvisko" size="10" value=""></td>
           <?php
           echo '<td><select name="kategoria">';
           echo '<option value="-">-</option>';
           while($row1 = $result->fetchArray(SQLITE3_ASSOC) ){
-            echo '<option value="'.$row1['NAZOV'].':'.$row['ID'].'">'.$row1['NAZOV'].'</option>';
+            echo '<option value="'.$row1['NAZOV'].'">'.$row1['NAZOV'].'</option>';
           }
           echo "</select></td>";
           ?>
+          <td><input type="text" name="meno" id="meno" size="10" value=""></td>
+          <td><input type="text" name="priezvisko" id="priezvisko" size="10" value=""></td>
+          
           <td><input type="text" name="oscislo" id="oscislo" size="10" value=""></td>
           <td><input type="text" name="cip" id="cip" size="10" value=""></td>
           <td><input type="text" name="poznamka" id="poznamka" size="10" value=""></td>
@@ -729,13 +740,13 @@ EOF;
 static function exportuj_zhodnotenie($id){
   $db = napoj_db();
     $sql =<<<EOF
-      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $id ORDER BY ZHODNOTENIE.CAS ASC;
+      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID JOIN PRIHLASENY ON PRIHLASENY.ID_POUZ=POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $id ORDER BY PRIHLASENY.KAT,ZHODNOTENIE.CAS ASC;
 EOF;
   $ret = $db->query($sql);
   $myfile = fopen("zhodnotenie.csv", "w") or die("Unable to open file!");
-    fputcsv($myfile, array("MENO","PRIEZVISKO","CAS"), ";");
+    fputcsv($myfile, array("KATEGORIA","MENO","PRIEZVISKO","CAS"), ";");
     while($row = $ret->fetchArray(SQLITE3_ASSOC) ){
-      fputcsv($myfile,array($row['MENO'],$row['PRIEZVISKO'],$row['CAS']),";");
+      fputcsv($myfile,array($row['KAT'],$row['MENO'],$row['PRIEZVISKO'],$row['CAS']),";");
     }
   echo '<meta http-equiv="refresh" content="0;URL=zhodnotenie.csv" />';
 }
@@ -743,13 +754,13 @@ EOF;
 static function vypis_zhodnotenie($ID_PRET){
   $db = napoj_db();
     $sql =<<<EOF
-      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $ID_PRET ORDER BY ZHODNOTENIE.CAS ASC;
+      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID JOIN PRIHLASENY ON PRIHLASENY.ID_POUZ=POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $ID_PRET ORDER BY PRIHLASENY.KAT,ZHODNOTENIE.CAS ASC;
 EOF;
 
   $ret = $db->query($sql);
   while ($row = $ret->fetchArray(SQLITE3_ASSOC)){
     ?>
-    <tr><td><?php echo $row["MENO"] ?></td><td><?php echo $row["PRIEZVISKO"] ?></td><td><?php echo $row["CAS"] ?></td></tr>
+    <tr><td><?php echo $row['KAT']?></td><td><?php echo $row["MENO"] ?></td><td><?php echo $row["PRIEZVISKO"] ?></td><td><?php echo $row["CAS"] ?></td></tr>
     <?php
   }
   if (isset($_SESSION["admin"]) && $_SESSION["admin"]){
@@ -761,7 +772,7 @@ EOF;
 static function vypis_zhodnotenie_admin($ID_PRET){
   $db = napoj_db();
     $sql =<<<EOF
-      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $ID_PRET ORDER BY ZHODNOTENIE.CAS ASC;
+      SELECT * FROM ZHODNOTENIE JOIN POUZIVATELIA ON ZHODNOTENIE.ID_POUZ = POUZIVATELIA.ID JOIN PRIHLASENY ON PRIHLASENY.ID_POUZ=POUZIVATELIA.ID WHERE ZHODNOTENIE.ID_PRET = $ID_PRET ORDER BY PRIHLASENY.KAT,ZHODNOTENIE.CAS ASC;
 EOF;
 
   $ret = $db->query($sql);
@@ -769,6 +780,8 @@ EOF;
   while($row = $ret->fetchArray(SQLITE3_ASSOC)){
     echo "<tr>";
   
+    echo "<td>".$row['KAT']."</td>";
+
     echo "<td>".$row['MENO']."</td>";  
 
     echo "<td>".$row['PRIEZVISKO']."</td>";
@@ -796,12 +809,13 @@ static function odstran_duplicity(){
       (ID INTEGER PRIMARY KEY   AUTOINCREMENT,
       ID_POUZ              TEXT    NOT NULL,
       ID_PRET        TEXT    NOT NULL,
-      KAT        TEXT    NOT NULL
+      KAT        TEXT    NOT NULL,
+      POZNAMKA TEXT
       );
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO duplicity(ID_POUZ, ID_PRET, KAT) SELECT PRIHLASENY.ID_POUZ, PRIHLASENY.ID_PRET, PRIHLASENY.KAT FROM PRIHLASENY GROUP BY ID_PRET, ID_POUZ;
+          INSERT INTO duplicity(ID_POUZ, ID_PRET, KAT,POZNAMKA) SELECT PRIHLASENY.ID_POUZ, PRIHLASENY.ID_PRET, PRIHLASENY.KAT, PRIHLASENY.POZNAMKA FROM PRIHLASENY GROUP BY ID_PRET, ID_POUZ;
 EOF;
 $db->exec($sql);
 $sql =<<<EOF

@@ -52,8 +52,8 @@ $i = 0;
 echo "<table id='zhodnotenie_table'><tr><th>Meno</th><th>Priezvisko</th><th>Čas</th></tr>";
 while($row = $ret->fetchArray(SQLITE3_ASSOC)){
   echo "<tr>";
-  
-  echo "<td>".$row['MENO']."</td>";  
+ 
+  echo "<td>".$row['MENO']."</td>"; 
 
   echo "<td>".$row['PRIEZVISKO']."</td>";
 
@@ -78,7 +78,7 @@ echo "</table>";
   	?>
   	<section>
   	<table id="zhodnotenie_table">
-  	<tr><th>Meno</th><th>Priezvisko</th><th>Čas</th></tr>
+  	<tr><th>Kategória</th><th>Meno</th><th>Priezvisko</th><th>Čas</th></tr>
   	<?php
   	
   	if (isset($_SESSION["admin"]) && $_SESSION["admin"] && isset($_POST["upravuj"])){
