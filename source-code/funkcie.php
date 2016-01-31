@@ -31,13 +31,14 @@ function vypis_db(){
       OS_I_C            VARCHAR,
       CHIP              INT,
       POZNAMKA          VARCHAR,
-      USPECH            VARCHAR
+      USPECH            VARCHAR,
+      oddiel            INTEGER
       );
 EOF;
 $id=$_GET['id'];
 $db->exec($sql);
 $sql =<<<EOF
-          INSERT INTO temp(ID, meno, priezvisko, OS_I_C, CHIP, POZNAMKA, USPECH) SELECT POUZIVATELIA.* FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $id);
+          INSERT INTO temp(ID, MENO, PRIEZVISKO, OS_I_C, CHIP, POZNAMKA, USPECH,oddiel) SELECT POUZIVATELIA.* FROM POUZIVATELIA INNER JOIN PRIHLASENY ON POUZIVATELIA.ID = PRIHLASENY.ID_POUZ  WHERE (PRIHLASENY.ID_PRET = $id);
 EOF;
 $db->exec($sql);
 $sql =<<<EOF
