@@ -1,5 +1,5 @@
 Datum: 30.9.2016
-Pritomny: Jaroslav Fuska, Michal Puskel, Tomas Slama, Martin Heinz
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
 Dohodnute stretnutie s cviciacim(Peter Gergel): streda 13:00
 Dohodnute timove stretnutie: stvrtok 11:30(?)
 
