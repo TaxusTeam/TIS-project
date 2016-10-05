@@ -1,0 +1,31 @@
+Datum: 30.9.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Dohodnute stretnutie s cviciacim(Peter Gergel): streda 13:00
+Dohodnute timove stretnutie: stvrtok 11:30(?)
+
+Ciele na tento tyzden: spravit Ganttov diagram
+
+Stretnutie so zadavatelom:
+	treningovy dennik pre deti
+		- nenadvazuje na predchadzajuci projekt
+		- PHP, SQLite, JavaScript
+		- skupiny(5 - 10 deti)
+		- skupin moze byt viac a mozu mat rozne ciele
+		- pisu si zabehnute kilometre
+		- vykreslenie planovanej vzdialenosti(napr. pre tento mesiac) do mapy(napr. Bratislava - Tatry)
+		- sumar pre dieta(tempo, cas, datum)
+		- co najjednosuchsi UI(male deti)
+
+		- kalendar - dieta si moze zapisat kolko zabehlo, ktory den v priebehu posledneho tyzdna
+		- na vyber 3x smajlik - zhodnotenie ako sa bezalo
+
+		-netreba appku staci responzivny web nech mozu cez smartfon
+
+		- viac trenerov 
+		- 1 trener moze mat viac skupin
+		- 1 admin
+		- decka vidia ostatne decka v skupine, aby sa mohli porovnat
+		
+		- "possible enhancement" - prihlasenie cez FB a G+/Gmail
+		
+		
