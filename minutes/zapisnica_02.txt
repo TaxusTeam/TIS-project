@@ -1,0 +1,19 @@
+Datum: 6.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+Stretli sme sa so zadavatelom, ktory nam objasnil detaily zadania.
+Na zaklade toho sme zacali vyberat technologie vhodne pre projekt(Google Maps API, PHP frameworky).
+
+Dohodnute na stretnuti:
+Aplikacia bude vyuzivat prihlasovanie cez Google, ale pri registracii sa bude vyplnat nas registracny formular.
+Nacrtnute priblizne UI:
+	- hierarchia stranok
+	- priblizny dizajn
+
+Ciele na tento tyzden:
+	- pripravit navrh UI pre zadavatela na review,
+	- podrobnejsie preskumat moznosti Google Maps API
+	- kontaktovat zadavatela
+	- spisat specifikaciu
