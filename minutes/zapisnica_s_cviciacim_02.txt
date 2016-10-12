@@ -1,0 +1,12 @@
+Datum: 12.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): streda 13:00
+
+Pripomienky cviciaceho:
+	Po tom ako si cviciaci precita specifikaciu.
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- napisali specifikaciu
+	- odoslali sme specifikaciu na review zadavatelovi
+	- vytvorili sme prototyp(throw-away) pre pracu s mapou
+	- odoslali sme zadavatelovi predbezny navrh UI
