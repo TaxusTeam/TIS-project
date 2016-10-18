@@ -83,7 +83,7 @@ Webová aplikácia predstavuje nový systém pre športový klub. So systémom p
 \multicolumn{1}{|l|}{SR-1 }    & \multicolumn{1}{l|}{\shortstack[l]{Web aplikácia bude postavená na Open Source \\ technológiách PHP a databáze(SQLite), Javascript, CSS(LESS).}} \\ \hline
 \multicolumn{1}{|l|}{SR-1.1} & \multicolumn{1}{l|}{\shortstack[l]{Web aplikácia musí korektne fungovať v prehliadačoch \\ Internet Explorer 10+, Firefox, Opera 11+ a Google Chrome}.}                                                  \\ \hline
 \multicolumn{1}{|l|}{SR-2}        & \multicolumn{1}{l|}{Aplikácia vykonáva dopyty na Google Maps API}                                                            \\ \hline
-\multicolumn{1}{|l|}{SR-2.1}         & \multicolumn{1}{l|}{Aplikácia vykonáva autentifikáciu uživatelov pomocou Google účtou.}                                                                                          \\ \hline
+\multicolumn{1}{|l|}{SR-2.1}         & \multicolumn{1}{l|}{Aplikácia vykonáva autentifikáciu uživatelov pomocou e-mailu a hesla zadanom pri registrácii.}                                                                                          \\ \hline
 
 \end{tabular}
 
@@ -108,7 +108,7 @@ Systém neobsahuje žiadne hardvérové rozhrania.
 
 
 \section{Funkcie systému}
-Prehľad funkcií, ktoré webový systém poskytuje používateľovi (Administrátorovi, Trénerovi a Bežcovi) je zobrazený na Obrázku 2.1.  \\
+Prehľad funkcií, ktoré webový systém poskytuje používateľovi (Administrátorovi, Trénerovi a Bežcovi) je zobrazený na Obrázku 2.1. (vrátane funkcií budúcej verzie systému)  \\
 
 \begin{figure}[ht!]
 \centering
@@ -121,12 +121,65 @@ Prehľad funkcií, ktoré webový systém poskytuje používateľovi (Administr�
 \begin{tabular}{ll}
 \hline
 \multicolumn{1}{|l|}{Administrátor}    & \multicolumn{1}{l|}{\shortstack[l]{Používateľ s maximálnymi možnými právomocami na správu webovej \\ aplikácie, používateľov a skupín. Úlohou administrátora je dohliadať na \\ používateľov, pomáhať s riešením problémov, starať sa o aktuálnosť \\ informacií, schvaľovanie nových trénerov a prípadná editácia skupín a \\ používateľov.}} \\ \hline
-\multicolumn{1}{|l|}{Tréner} & \multicolumn{1}{l|}{\shortstack[l]{Tréner musí byť schválený administrátorom. Jeho úlohou je spravovať \\ svoje skupiny, vytvárať bežecké plány a pridávať aktuality týkajúce \\ sa športového klubu.}}                                                  \\ \hline
+\multicolumn{1}{|l|}{Tréner} & \multicolumn{1}{l|}{\shortstack[l]{Tréner musí byť schválený administrátorom. Jeho úlohou je spravovať \\ svoje skupiny, vytvárať bežecké plány. }}                                                  \\ \hline
 \multicolumn{1}{|l|}{Bežec}        & \multicolumn{1}{l|}{\shortstack[l]{Koncový používateľ webovej aplikácie pre koho je určená. Má prístup \\ k prihláseniu, zapisovaniu svojich výsledkov do zápisníka, sledovaniu \\ svojho progresu a achievementov, prezeraniu svojich štatistík. Bežec \\ si môže prezerať profil iného bežca zo svojej skupiny. Svoj profil môže \\ kedykoľvek editovať.}                          }                                                                             \\ \hline
 \end{tabular}
 
 \section{Budúca verzia systému}
-Zatiaľ nie sú plánované ďaľšie verzie systému.
+\begin{itemize}
+\item Tréner bude môcť pridávať a editovať  príspevky na domovskej stránke.
+
+\subsection{Pridávanie príspevkov na nástenku}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Tréner bude mať možnosť pridať príspevky na nástenku na \\ domovskej stránke aplikácie, ktoré budú viditeľné pre \\ prihlásených užívateľov.}} \\ \hline
+\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
+\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
+\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
+\end{tabular}
+
+\subsection{Editovanie príspevkov na nástenke}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Tréner bude mať možnosť editovať svoje príspevky na domovskej \\ stránke aplikácie.}} \\ \hline
+\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
+\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
+\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
+\end{tabular}
+
+ \item Administrátor bude môcť pridávať, editovať a mazať príspevky na domovskej stránke.
+
+\subsection{Pridávanie príspevkov}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Administrátor bude mať možnosť pridávať príspevky a oznamy na hlavnú\\ stránku.}} \\ \hline
+\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
+\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
+\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
+\end{tabular}
+
+\subsection{Editovanie príspevkov}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Administrátor bude mať možnosť upravovať príspevky a oznamy na\\ hlavnej stránke. Ako jediný bude môcť upravovať aj príspevky trénerov.}} \\ \hline
+\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
+\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
+\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
+\end{tabular}
+
+\subsection{Mazanie príspevkov}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Administrátor bude mať možnosť mazať ľubovoľné príspevky a oznamy\\ na hlavnej stránke, teda aj príspevky trénerov.}} \\ \hline
+\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{ -}}                                                  \\ \hline
+\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
+\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Kým existuje aspoň jeden príspevok}}                                                  \\ \hline
+\end{tabular}
+
+\item Prihlasovanie pomocou Google konta.
+\end{itemize}
+
+
 
 
 \chapter{Špecifikácia požiadaviek}
@@ -136,7 +189,7 @@ Zatiaľ nie sú plánované ďaľšie verzie systému.
 \subsection{Zobrazovanie príspevkov na domovskej stránke}
 \begin{tabular}{ll}
 \hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Používateľ bude mať možnosť vidieť všetky aktuálne príspevky a \\ oznamy od trénerov a administrátora. Nebudú mať možnosť ich \\ upravovať ani mazať. V prípade že chce bežec reagovať na príspevok \\ má  možnosť prekliknúť sa na profil prispievateľa a následne \\ ho kontaktovať e-mailom. }} \\ \hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Používateľ bude mať možnosť vidieť všetky aktuálne príspevky a \\ oznamy od trénerov. }} \\ \hline
 \multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{ - }}                                                  \\ \hline
 \multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
 \multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
@@ -149,6 +202,15 @@ Zatiaľ nie sú plánované ďaľšie verzie systému.
 \multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{- }}                                                  \\ \hline
 \multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
 \multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
+\end{tabular}
+
+\subsection{Výber plánu}
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Bežec dostáva možnosť prihlásiť sa do bežeckého plánu zadaného\\ trénerom. Bežec môže byť pridelený k plánu už priamo ténerom. }} \\ \hline
+\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{ - }}                                                  \\ \hline
+\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
+\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Preddefinovaná}}                                                  \\ \hline
 \end{tabular}
 
 \subsection{Vkladanie údajov do zápisníka}
@@ -216,28 +278,10 @@ Zatiaľ nie sú plánované ďaľšie verzie systému.
 \multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{V závislosti od požiadaviek.}}                                                  \\ \hline
 \end{tabular}
 
-\subsection{Pridávanie príspevkov na nástenku}
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Tréner bude mať možnosť pridať príspevky na nástenku na \\ domovskej stránke aplikácie, ktoré budú viditeľné pre \\ prihlásených užívateľov.}} \\ \hline
-\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
-\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
-\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
-\end{tabular}
-
-\subsection{Editovanie príspevkov na nástenke}
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Tréner bude mať možnosť editovať svoje príspevky na domovskej \\ stránke aplikácie.}} \\ \hline
-\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
-\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
-\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
-\end{tabular}
-
 \subsection{Vytváranie bežeckého plánu}
 \begin{tabular}{ll}
 \hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Tréner bude mať možnosť vytvoriť bežecký plán pre svoju skupinu \\ zvolením trasi na mape. Cieľom skupiny je spoločne odbehnúť počet \\ kilometrov určený touto trasou.}} \\ \hline
+\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Tréner bude mať možnosť vytvoriť bežecký plán pre svoju skupinu \\ zvolením trasi na mape. Cieľom bežca je odbehnúť počet \\ kilometrov určený touto trasou. Tréner vyberie bežcov pre\\ aktuálny plán, alebo sa bežec prihlási sám.}} \\ \hline
 \multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
 \multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
 \multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
@@ -272,32 +316,7 @@ Zatiaľ nie sú plánované ďaľšie verzie systému.
 
 \section{Možnosti administrátora po prihlásení}
 
-\subsection{Pridávanie príspevkov}
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Administrátor bude mať možnosť pridávať príspevky a oznamy na hlavnú\\ stránku.}} \\ \hline
-\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
-\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
-\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
-\end{tabular}
 
-\subsection{Editovanie príspevkov}
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Administrátor bude mať možnosť upravovať príspevky a oznamy na hlavnej\\ stránke. Ako jediný bude môcť upravovať aj príspevky trénerov.}} \\ \hline
-\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{-}}                                                  \\ \hline
-\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
-\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Ľubovoľná}}                                                  \\ \hline
-\end{tabular}
-
-\subsection{Mazanie príspevkov}
-\begin{tabular}{ll}
-\hline
-\multicolumn{1}{|l|}{Popis:}    & \multicolumn{1}{l|}{\shortstack[l]{Administrátor bude mať možnosť mazať ľubovoľné príspevky a oznamy na \\hlavnej stránke, teda aj príspevky trénerov.}} \\ \hline
-\multicolumn{1}{|l|}{Vstupné podmienky:} & \multicolumn{1}{l|}{\shortstack[l]{ -}}                                                  \\ \hline
-\multicolumn{1}{|l|}{Výstupné podmienky:}& \multicolumn{1}{l|}{\shortstack[l]{-} }                                         \\ \hline
-\multicolumn{1}{|l|}{Opakovanosť :} & \multicolumn{1}{l|}{\shortstack[l]{Kým existuje aspoň jeden príspevok}}                                                  \\ \hline
-\end{tabular}
 
 \subsection{Vytvorenie skupiny}
 \begin{tabular}{ll}
@@ -407,3 +426,21 @@ Zatiaľ nie sú plánované ďaľšie verzie systému.
 
 
 \end{document} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
