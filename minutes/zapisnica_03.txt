@@ -1,0 +1,21 @@
+Datum: 13.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	Napisali sme specifikaciu
+	Otestovali sme frameworky, ktore by mohli byt vhodne pre projekt
+	vytvorili sme prototyp pre pracu s mapou
+
+Dohodnute na stretnuti:
+	Martin Heinz - Use-case diagram
+	Tomas Slama - ERD
+	Michal Puskel - Sekvencny diagram
+	Jaroslav Fuska - Stavovy diagram
+
+Ciele na tento tyzden:
+	- vytvorit entitno relaèný diagram,
+	- vytvorit use-case diagramy,
+	- vytvorit stavové diagramy,
+	- vytvorit sekvenèné diagramy,
+	- v pripade schvalenia pouzitia frameworku(Laravel) zadavatelom, instalacia a zoznamenie sa s prostredim
