@@ -1,0 +1,138 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[top=2.5cm,bottom=2.5cm,left=1.5cm,right=1.5cm]{geometry}
+
+\usepackage{cmap}
+\usepackage{graphicx}
+\usepackage[english,slovak]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{amsthm}
+\newtheorem{veta}{Veta}[section]
+\newtheorem{lema}[veta]{Lema}
+\theoremstyle{definition}
+\newtheorem{definicia}{Definícia}[chapter]
+\theoremstyle{remark}
+\newtheorem*{poznamka}{Poznámka}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\begin{document}
+
+%\includepdf{zadanie.pdf}
+
+%%% DEFINÍCIE NÁZVOV
+\def\nazov{ANALÝZA TECHNOLÓGIÍ}
+\def\autorJ{Jaroslav Fúska }
+\def\autorT{Tomáš Sláma }
+\def\autorH{ Martin Heinz }
+\def\autorM{Michal Puškel }
+\def\fakulta{Fakulta matematiky, fyziky a~informatiky}
+\def\univerzita{Univerzita Komenského v~Bratislave}
+\def\mesto{Bratislava}
+\def\typprace{Športový klub}
+\def\rok{2016}
+%%% OBAL
+\thispagestyle{empty}
+\begin{center}
+\textsc{\LARGE\univerzita}\\
+\bigskip\textsc{\LARGE\fakulta}\\
+\vfill\textsc{\Huge\nazov}\\
+\medskip{\Large\typprace}\\
+\vfill{\large\rok\hfill\autorJ\\ \hfill\autorT \\ \hfill \autorH \\ \hfill \autorM}
+\end{center}
+
+\tableofcontents
+
+\chapter{Technológie}
+%\setcounter{page}{5}
+\addcontentsline{toc}{chapter}{\numberline {}Technológie}
+
+\section{HTML}
+\begin{itemize}
+\item HTML (Hypertext Markup Language) bude použité na základnú štruktúru webovej aplikácie a rozmiestnenie objektov.
+\item využitá bude verzia HTML 5.0
+\item HTML bude kombinované s viacerými jazykmi, ako napríklad PHP, CSS...
+\end{itemize}
+
+\section{CSS}
+\begin{itemize}
+\item CSS (Cascading Style Sheets) bude použité na vytvorenie, úpravu dizajnu a štylizovanie webovej aplikácie.
+\item využitá bude verzia CSS 3.0
+\item CSS bude využité aj na vytvorenie responzivity webovej aplikácie
+\end{itemize}
+
+\section{Bootstrap}
+\begin{itemize}
+\item Bootstrap je jednoduchá voľne stiahnuteľná sada nástrojov na tvorbu webových aplikácií
+\item obsahuje návrhárske šablóny založené na HTML a CSS
+\item pre využívanie je potrebná dobrá znalosť HTML a CSS
+\item využíva LESS deklarácie, čo umožňuje používanie napr. premenných a funkcií priamo v CSS kóde
+\item dôvod použitia: efektívnejšia práca pri navrhovaní a vytváraní responzívnej aplikácie
+\end{itemize}
+
+\section{LESS}
+\begin{itemize}
+\item LESS je "dynamic style sheet"  jazyk, ktorý je možné skompilovať do CSS
+\item umožňuje definovať a používať premenné a funkcie
+\item dôvod použitia: efektívnejšia práca pri úpravách CSS (napr. zmena farieb...)
+\end{itemize}
+
+\section{PHP}
+\begin{itemize}
+\item PHP je skriptovací jazyk, ktorý sa používa najmä na programovanie klient-server aplikácií
+\item dôvod použitia: PHP dokáže spolupracovať s relačnými databázami, ako napr. MySQL alebo SQLite, ktoré budú súčasťou nášho projektu
+\item predpokladané použitie verzie PHP 5.5 / 7
+\end{itemize}
+
+\section{JavaScript}
+\begin{itemize}
+\item JS je multiplatformový, objektovo orientovaný skriptovací jazyk na strane klienta
+\item dôvod použitia: využitie na interakciu s používateľom, prácu s dátami z GoogleMaps api 
+\end{itemize}
+
+\section{Laravel}
+\begin{itemize}
+\item open source framework pre PHP
+\item Laravel zahŕňa ako základné funkcie:
+	
+	\begin{itemize}
+	\item autentifikáciu - kontrolu prístupu
+	\item routovanie - spravovanie, smerovanie a spracovanie dotazov na jednom mieste
+	\item databázu - všetky nástroje potrebné na komunikáciu s databázou
+	\item mail - posielanie emailov s prílohami a vloženými súbormi
+	\item sessios
+	\item caching 
+	\end{itemize}
+
+\item dôvod použitia: zjednodušenie práce pri programovaní funkcií, bezpečnejšie a efektívnejšie algoritmy na autentifikáciu a komunikáciu s databázou
+\end{itemize}
+
+\section{SQL}
+\begin{itemize}
+\item štruktúrovaný vzhľadávací jazyk určený na manipuláciu (výber, vkladanie, úpravu a mazanie) a definúciu údajov v relačných databázových systémoch
+\item dôvod použitia: jedna z hlavných súčastí projektu budú relačné databázy a práca s nimi
+\end{itemize}
+
+\section{SQLite}
+\begin{itemize}
+\item je relačná databáza pracujúca bez servera, čiže používa iba klientsku časť
+\item nie je potrebná jej inštalácia ani žiadne konfiguračné súbory
+\item jednoduchý import a export tabuliek
+\item dôvod použitia: využitie na uloženie dát potrebných pre fungovanie webovej aplikácie
+\end{itemize}
+
+\section{WAMP / LAMP}
+\begin{itemize}
+\item apache, MySQL a PHP aplikačná serverová platforma
+\item dôvod použitia: využitie počas testovania webovej aplikácie bez prístupu k serveru na ktorom bude výsledná aplikácia bežať
+\end{itemize}
+
+
+
+\end{document} 
