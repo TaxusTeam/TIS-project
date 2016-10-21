@@ -1,0 +1,14 @@
+Datum: 20.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	- Spravili sme diagramy.
+
+Dohodnute na stretnuti:
+	- aplikacia bude vyuzivat LESS
+
+Ciele na tento tyzden:
+	- Upravit diagramy z minuleho tyzdna podla pripomienok cviciaceho.
+	- Pozriet si zaklady pre LESS a bootstrap
+	- Spravit datovy model
