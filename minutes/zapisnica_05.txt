@@ -1,0 +1,16 @@
+Datum: 27.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	Opravili sme diagramy.
+	Spravili sme datovy model.
+	Spravili sme analyzu technologii.
+
+Dohodnute na stretnuti:
+	- triedny diagram
+
+Ciele na tento tyzden:
+	- Spravit triedny diagram,
+	- Spravit dekompozicia,
+	- Spravit testovacie scenare
