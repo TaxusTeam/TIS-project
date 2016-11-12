@@ -1,0 +1,12 @@
+Datum: 9.11.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): streda 13:00
+
+Pripomienky cviciaceho:
+	Ziadne
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- Opravili sme datovy model.
+	- Spravili sme triedny diagram.
+	- Spravili sme dekompoziciu.
+    - Pripravili sme testovacie scenare.
