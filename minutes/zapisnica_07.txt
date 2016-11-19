@@ -1,0 +1,13 @@
+Datum: 17.11.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	Pridane prihlasovanie do aplikacie.
+    Vytvorena databaza.
+    Databaza naplnena testovacimi datami.
+
+Ciele na tento tyzden:
+	- Vytovrit pouzivatelsky profil
+	- Spojit diagramy do jedneho dokumentu(navrh)
+	- Pridavat dalsie funkcionality do aplikacie
