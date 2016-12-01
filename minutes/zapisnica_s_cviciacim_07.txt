@@ -1,0 +1,15 @@
+Datum: 30.11.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): streda 13:00
+
+Pripomienky cviciaceho:
+	Ziadne
+    
+Dohodnute na stretnuti:
+    Dalsie stretnutie 6.12 o 11:30
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- skompletizovali sme navrh
+    - rozsirili sme funkcie profilu
+    - vytvorili sme finalnu verziu mapy
+    - pridali sme funkcie do administracie
