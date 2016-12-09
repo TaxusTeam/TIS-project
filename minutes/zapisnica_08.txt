@@ -1,5 +1,5 @@
 Datum: 1.12.2016
-Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Tomas Slama(manazment komunikacie)
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
 Timove stretnutie: stvrtok 11:30
 
 Zhodnotenie predchadzajuceho tyzdna:
