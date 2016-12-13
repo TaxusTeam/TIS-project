@@ -1,0 +1,11 @@
+Datum: 7.12.2016
+Pritomny: Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): utorok 11:20
+
+Pripomienky cviciaceho:
+	Ziadne
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- Pridali sme pridavanie, mazanie a upravovanie skupin
+    - Pridali sme DB models
+    - Pridali sme seedovanie DB dat.

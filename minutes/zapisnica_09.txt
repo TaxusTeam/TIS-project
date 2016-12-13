@@ -1,0 +1,12 @@
+Datum: 8.12.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	- Pridali sme pridavanie, mazanie a upravovanie skupin
+    - Pridali sme DB models
+    - Pridali sme seedovanie DB dat.
+
+Ciele na tento tyzden:
+	- pokracovat v implementacii
+    - dohodnut si stretnutie so zadanatelom, kvoli prezentovaniu aplikacie
