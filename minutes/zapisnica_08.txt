@@ -1,0 +1,21 @@
+Datum: 1.12.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	- skompletizovali sme navrh
+    - rozsirili sme funkcie profilu
+    - vytvorili sme finalnu verziu mapy
+    - pridali sme funkcie do administracie
+    
+Dohodnute na stretnuti:
+    - rozdelili sme si zostavajuce casti implemetacie:
+        Tomas - vytvaranie, mazanie, upravovanie skupin,
+        Michal - vytvaranie, mazanie, upravovanie BP,
+        Jaro - zapisnik - zapisovanie do vsetkych planov,
+        Martin - statistiky,
+        TBD - achievementy
+
+Ciele na tento tyzden:
+	- pokracovat v implementacii
+    

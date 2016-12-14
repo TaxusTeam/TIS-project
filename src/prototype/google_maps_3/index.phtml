@@ -1,5 +1,5 @@
 <?php
-$GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
+    $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
 ?>
 
 <!DOCTYPE html>
@@ -81,8 +81,8 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
             var delta_lambda = toRadians((b.lng() - a.lng()));
 
             var aa = Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
-                Math.cos(phi_a) * Math.cos(phi_b) *
-                Math.sin(delta_lambda / 2) * Math.sin(delta_lambda / 2);
+                     Math.cos(phi_a) * Math.cos(phi_b) *
+                     Math.sin(delta_lambda / 2) * Math.sin(delta_lambda / 2);
             var cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1 - aa));
 
             return R * cc;
@@ -104,7 +104,7 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
             var x = Math.cos(lat_b) * Math.cos(delta_lng);
             var y = Math.cos(lat_b) * Math.sin(delta_lng);
             var lat_mid = Math.atan2(Math.sin(lat_a) + Math.sin(lat_b),
-                Math.sqrt((Math.cos(lat_a) + x) * (Math.cos(lat_a) + x) + y * y));
+                                     Math.sqrt((Math.cos(lat_a) + x) * (Math.cos(lat_a) + x) + y * y));
             var lng_mid = lng_a + Math.atan2(y, Math.cos(lat_a) + x);
 
             var center = new google.maps.LatLng({
