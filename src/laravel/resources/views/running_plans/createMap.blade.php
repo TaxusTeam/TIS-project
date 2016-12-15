@@ -2,101 +2,30 @@
 $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
 ?>
 
-<div id="floating-panel">
-    <input id="address" type="textbox" value="vysoke tatry">
-    <input id="submit" type="button" value="Geocode">
-</div>
+<input class="col-xs-12 col-sm-8" id="gmap--address" type="textbox" value="vysoke tatry" placeholder="Hľadaj na mape">
+<input class="col-xs-12 col-sm-4" id="gmap--geocode" type="button" value="Hľadaj na mape">
 
 <div id="map"></div>
+
+<input class="col-xs-12 col-sm-4" id="gmap--locate" type="button" value="Lokalizuj aktuálnu polohu">
+<div class="col-xs-12 col-sm-4" id="gmap--distance"></div>
+<input class="col-xs-12 col-sm-4" id="gmap--clear-path" type="button" value="Vymaž trasu">
+
+<h2 class="gmap--instructions">Kliknutím ľavým tlačidlom myši pridáte koncový bod trasy.</h2>
+<h2 class="gmap--instructions">Trasu môžete tvarovať jej ťahaním.</h2>
+<h2 class="gmap--instructions">Ak sa Vám nedarí vytvárať koncové body trasy, ubezpečte sa prosím, že skutočne iba klikáte a nie ťaháte myš so stlačeným tlačidlom.</h2>
 
 <script>
     function initMap() {
 
-        function toDegrees (r) {
-            return r * (180 / Math.PI);
-        }
-
-        function toRadians (d) {
-            return d * (Math.PI / 180);
-        }
-
-        /**
-         * counts approximate air distance between two points
-         * @param a - LatLng Object
-         * @param b - LatLng Object
-         * @returns {number} - distance between a and b in metres
-         */
-        function geoDistance (a, b) {
-            var R = 6371e3;
-            var phi_a = toRadians(a.lat());
-            var phi_b = toRadians(b.lat());
-            var delta_phi = toRadians((b.lat() - a.lat()));
-            var delta_lambda = toRadians((b.lng() - a.lng()));
-
-            var aa = Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
-                    Math.cos(phi_a) * Math.cos(phi_b) *
-                    Math.sin(delta_lambda / 2) * Math.sin(delta_lambda / 2);
-            var cc = 2 * Math.atan2(Math.sqrt(aa), Math.sqrt(1 - aa));
-
-            return R * cc;
-        }
-
-        /**
-         * counts approximate center between two points
-         * @param a - LatLng Object
-         * @param b - LatLng Object
-         * @returns {LatLng} - LatLng object midPoint between a and b
-         */
-        function geoMidPoint(a, b) {
-            var delta_lng = toRadians(b.lng() - a.lng());
-
-            var lat_a = toRadians(a.lat());
-            var lat_b = toRadians(b.lat());
-            var lng_a = toRadians(a.lng());
-
-            var x = Math.cos(lat_b) * Math.cos(delta_lng);
-            var y = Math.cos(lat_b) * Math.sin(delta_lng);
-            var lat_mid = Math.atan2(Math.sin(lat_a) + Math.sin(lat_b),
-                    Math.sqrt((Math.cos(lat_a) + x) * (Math.cos(lat_a) + x) + y * y));
-            var lng_mid = lng_a + Math.atan2(y, Math.cos(lat_a) + x);
-
-            var center = new google.maps.LatLng({
-                lat: toDegrees(lat_mid),
-                lng: toDegrees(lng_mid)
-            });
-
-            return center;
-        }
-
-        function generateInterpolationPath(path, ix, distance) {
-            if (geoDistance(path[ix], path[ix+1]) <= distance) {
-                return 0;
-            }
-
-            path.splice(ix+1, 0, geoMidPoint(path[ix], path[ix+1]));
-            var leftBranch = generateInterpolationPath(path, ix, distance);
-            var rightBranch = generateInterpolationPath(path, ix + leftBranch + 1, distance);
-
-            return leftBranch + 1 + rightBranch;
-        }
-
-        function setGeoPath(initPath) {
-            var granularity = 10;
-            var offset = 0;
-            var initLength = initPath.length;
-            for (var i = 0; i < initLength - 1; i++) {
-                offset += generateInterpolationPath(initPath, i + offset, granularity);
-            }
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        var myLatlng = {lat: 48.1512219, lng: 17.0701161};
+        var fmfiLatlng = {lat: 48.1512219, lng: 17.0701161};
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            center: myLatlng,
+            center: fmfiLatlng,
             zoom: 16,
         });
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         function geolocate() {
             if (navigator.geolocation) {
@@ -111,29 +40,35 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
             }
         }
 
-        geolocate(); // nefunguje v Chrome pre insecure locations (na https servri to pojde ???) vo FF ide ok
+        $(document).ready(function () {
+            $("#gmap--locate").click(function () {
+                geolocate();
+            });
+        });
 
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         var geocoder = new google.maps.Geocoder();
 
-        document.getElementById('submit').addEventListener('click', function() {
-            geocodeAddress(geocoder, map);
-        });
-
         function geocodeAddress(geocoder, resultsMap) {
-            var address = document.getElementById('address').value;
+            var address = document.getElementById('gmap--address').value;
+
             geocoder.geocode({'address': address, 'region': 'SK'}, function(results, status) {
                 if (status === 'OK') {
                     resultsMap.setCenter(results[0].geometry.location);
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    alert('Nepodarilo sa nájsť zadanú adresu z dôvodu: ' + status);
                 }
             });
         }
 
-        var autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'), {});
+        var autocomplete = new google.maps.places.Autocomplete(document.getElementById('gmap--address'), {});
 
+        $(document).ready(function () {
+           $("#gmap--geocode").click(function () {
+               geocodeAddress(geocoder, map);
+           });
+        });
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -147,24 +82,46 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
 
         var routeStart = null;
         var routeEnd = null;
+        var routeStartMarker = new google.maps.Marker({
+            map: map,
+        });
+        var routeEndMarker = new google.maps.Marker({
+            map: map,
+        });
 
         map.addListener('click', function (e) {
             if (routeStart == null) {
                 routeStart = e.latLng;
+
+                routeStartMarker.setMap(map);
+                routeStartMarker.setPosition(routeStart);
             } else if (routeEnd == null) {
                 routeEnd = e.latLng;
+
+                routeEndMarker.setMap(map);
+                routeEndMarker.setPosition(routeEnd);
 
                 initRoute();
             }
         });
 
-        var playerMarker = new google.maps.Marker({
-            map: map,
+        $(document).ready(function () {
+            $("#gmap--clear-path").click(function () {
+                routeStart = null;
+                routeEnd = null;
+
+                routeStartMarker.setMap(null);
+                routeEndMarker.setMap(null);
+
+                directionsDisplay.setMap(null);
+
+                $(document).ready(function () {
+                    $("input[type='submit']").attr("disabled", "disabled");
+                });
+            });
         });
 
-        var slider = document.getElementById('slider');
 
-        var infoText = document.getElementById('text');
 
         function initRoute() {
             var request = {
@@ -179,7 +136,14 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
                     directionsDisplay.setDirections(result);
                     directionsDisplay.setMap(map);
 
-                    updateRoute(result)
+                    //updateRoute(result);
+
+                    routeStartMarker.setMap(null);
+                    routeEndMarker.setMap(null);
+
+                    $(document).ready(function () {
+                        $("input[type='submit']").removeAttr("disabled");
+                    });
                 }
             });
         }
@@ -193,6 +157,7 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
         function updateRoute(directionsResult) {
             var steps = directionsResult.routes[0].overview_path;
             var totalDistanceText = directionsResult.routes[0].legs[0].distance.text;
+            var totalDistanceValue = directionsResult.routes[0].legs[0].distance.value;
 
             var path = [];
 
@@ -200,11 +165,22 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
                 path.push(steps[i]);
             }
 
-            setGeoPath(path);
+            $(document).ready(function () {
+                $("#gmap--distance").html("celková vzdialenosť: " + totalDistanceText);
+            });
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            localStorage.setItem("totalDistanceText", totalDistanceText);
+            localStorage.setItem("totalDistanceValue", totalDistanceValue);
+            localStorage.setItem("totalGeoLocationsLength", path.length);
+            for (var i = 0; i < path.length; i++) {
+                localStorage.setItem("geoLocation_" + i + "_Lat", path[i].lat());
+                localStorage.setItem("geoLocation_" + i + "_Lng", path[i].lng());
+            }
         }
     }
 </script>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=<?= $GMAP_API_KEY ?>&callback=initMap&language=sk&region=SK&libraries=places"
         async defer>
 </script>

@@ -286,6 +286,7 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
 
     public static $classMap = array (
         'AchievementTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'AddDistanceToRunningPlansTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_14_233155_add_distance_to_running_plans_table.php',
         'AddGroupIdToRunningPlansTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_12_210108_add_group_id_to_running_plans_table.php',
         'CreateAchievementTypesTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_04_114736_create_achievement_types_table.php',
         'CreateAchievementsTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_04_115435_create_achievements_table.php',

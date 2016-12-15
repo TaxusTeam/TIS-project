@@ -62,3 +62,6 @@ Route::controllers([
 ]);
 
 Route::resource('running_plan', 'RunningPlanController');
+
+Route::post('running_planSetMap', 'RunningPlanController@setMap');
+Route::get('running_planGetMap', 'RunningPlanController@getMap');

@@ -42,8 +42,20 @@ class RunningPlanController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		return view('running_plans.store');
 	}
+
+    public function setMap()
+    {
+        Session::set("aa", $_POST["aa"]);
+        Session::set("bb", $_POST["bb"]);
+        Session::set("cc", $_POST["cc"]);
+    }
+
+    public function getMap()
+    {
+        return view('running_plans.getMap');
+    }
 
 	/**
 	 * Display the specified resource.
