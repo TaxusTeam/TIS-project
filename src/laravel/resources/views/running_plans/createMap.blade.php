@@ -12,7 +12,6 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
 <input class="col-xs-12 col-sm-4" id="gmap--clear-path" type="button" value="Vymaž trasu">
 
 <h2 class="gmap--instructions">Kliknutím ľavým tlačidlom myši pridáte koncový bod trasy.</h2>
-<h2 class="gmap--instructions">Trasu môžete tvarovať jej ťahaním.</h2>
 <h2 class="gmap--instructions">Ak sa Vám nedarí vytvárať koncové body trasy, ubezpečte sa prosím, že skutočne iba klikáte a nie ťaháte myš so stlačeným tlačidlom.</h2>
 
 <script>
@@ -75,7 +74,7 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
 
         var directionsDisplay = new google.maps.DirectionsRenderer({
             preserveViewport: true,
-            draggable: true,
+            draggable: false,
         });
 
         var directionsService = new google.maps.DirectionsService();
@@ -171,13 +170,12 @@ $GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            localStorage.setItem("totalDistanceText", totalDistanceText);
-            localStorage.setItem("totalDistanceValue", totalDistanceValue);
-            localStorage.setItem("totalGeoLocationsLength", path.length);
-            for (var i = 0; i < path.length; i++) {
-                localStorage.setItem("geoLocation_" + i + "_Lat", path[i].lat());
-                localStorage.setItem("geoLocation_" + i + "_Lng", path[i].lng());
-            }
+            document.cookie = "totalDistanceText=" + totalDistanceText + ";path=/";
+            document.cookie = "totalDistanceValue=" + totalDistanceValue + ";path=/";
+            document.cookie = "geoLocationOriginLat=" + path[0].lat() + ";path=/";
+            document.cookie = "geoLocationOriginLng=" + path[0].lng() + ";path=/";
+            document.cookie = "geoLocationDestinationLat=" + path[path.length - 1].lat() + ";path=/";
+            document.cookie = "geoLocationDestinationLng=" + path[path.length - 1].lng() + ";path=/";
         }
     }
 </script>

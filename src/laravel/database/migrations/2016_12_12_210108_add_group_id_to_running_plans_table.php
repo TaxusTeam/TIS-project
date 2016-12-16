@@ -14,8 +14,7 @@ class AddGroupIdToRunningPlansTable extends Migration {
 	{
 		Schema::table('running_plans', function(Blueprint $table)
 		{
-            $table->integer('group_id')->unsigned()->nullable();
-            $table->foreign("group_id")->references("id")->on("groups")->onDelete('cascade');
+
 		});
 	}
 
@@ -28,7 +27,7 @@ class AddGroupIdToRunningPlansTable extends Migration {
 	{
 		Schema::table('running_plans', function(Blueprint $table)
 		{
-			$table->dropColumn('group_id');
+
 		});
 	}
 

@@ -4,6 +4,7 @@ use App\Group;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\RunningPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,22 +41,29 @@ class RunningPlanController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		return view('running_plans.store');
+	    $trainerId = Auth::user()->id;
+
+        $running_plan = RunningPlan::create([
+            "owner_id" => $trainerId,
+            "origin" => $request->get('origin'),
+            "destination" => $request->get('destination'),
+            "start" => date("Y-m-d H:i:s", strtotime($request->get('start'))),
+            "end" => date("Y-m-d H:i:s", strtotime($request->get('end'))),
+            "description" => $request->get('description'),
+            "name" => $request->get('name'),
+            "group_id" => $request->get('group_id'),
+            "distance_text" => $_COOKIE["totalDistanceText"],
+            "distance_value" => $_COOKIE["totalDistanceValue"],
+            "origin_lat" => (float)$_COOKIE["geoLocationOriginLat"],
+            "origin_lng" => (float)$_COOKIE["geoLocationOriginLng"],
+            "destination_lat" => (float)$_COOKIE["geoLocationDestinationLat"],
+            "destination_lng" => (float)$_COOKIE["geoLocationDestinationLng"],
+        ]);
+
+		return redirect()->route('running_plan.show', $running_plan->id);
 	}
-
-    public function setMap()
-    {
-        Session::set("aa", $_POST["aa"]);
-        Session::set("bb", $_POST["bb"]);
-        Session::set("cc", $_POST["cc"]);
-    }
-
-    public function getMap()
-    {
-        return view('running_plans.getMap');
-    }
 
 	/**
 	 * Display the specified resource.
@@ -65,7 +73,10 @@ class RunningPlanController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$runningPlan = RunningPlan::query()->findOrFail($id);
+
+        return view('running_plans.show')
+            ->with('runningPlan', $runningPlan);
 	}
 
 	/**

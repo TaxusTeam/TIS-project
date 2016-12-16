@@ -14,8 +14,7 @@ class AddDistanceToRunningPlansTable extends Migration {
 	{
 		Schema::table('running_plans', function(Blueprint $table)
 		{
-            $table->string('distance_text')->nullable();
-            $table->integer('distance_value')->unsigned()->nullable();
+
 		});
 	}
 
@@ -28,8 +27,7 @@ class AddDistanceToRunningPlansTable extends Migration {
 	{
 		Schema::table('running_plans', function(Blueprint $table)
 		{
-            $table->dropColumn('distance_text');
-            $table->dropColumn('distance_value');
+
 		});
 	}
 

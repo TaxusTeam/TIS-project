@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
 {
     public static $files = array (
-        '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
         'fe1bcd0336136e435eaf197895daf81a' => __DIR__ . '/..' . '/nikic/php-parser/lib/bootstrap.php',
         '9f7f3f9b1f82484e76bcd07b985a2d2f' => __DIR__ . '/..' . '/symfony/var-dumper/Symfony/Component/VarDumper/Resources/functions/dump.php',
         'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
@@ -23,9 +22,17 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
+        ),
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
         ),
         'S' => 
         array (
@@ -64,6 +71,9 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
+            'Doctrine\\Common\\Cache\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
+            'Doctrine\\Common\\' => 16,
         ),
         'C' => 
         array (
@@ -82,9 +92,19 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpDocumentor\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
+        ),
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
         'Symfony\\Polyfill\\Util\\' => 
         array (
@@ -154,6 +174,18 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
         ),
+        'Doctrine\\Common\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+        'Doctrine\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+        ),
         'Collective\\Html\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravelcollective/html/src',
@@ -177,13 +209,6 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
     );
 
     public static $prefixesPsr0 = array (
-        'p' => 
-        array (
-            'phpDocumentor' => 
-            array (
-                0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            ),
-        ),
         'S' => 
         array (
             'Symfony\\Component\\VarDumper\\' => 
@@ -259,9 +284,21 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
             array (
                 0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
             ),
+            'Doctrine\\DBAL\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
+            ),
+            'Doctrine\\Common\\Lexer\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
+            ),
             'Doctrine\\Common\\Inflector\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
+            ),
+            'Doctrine\\Common\\Collections\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
             ),
             'Diff' => 
             array (
@@ -287,6 +324,7 @@ class ComposerStaticInitf81c5fe4db8fdf9adb0e883a7859336d
     public static $classMap = array (
         'AchievementTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'AddDistanceToRunningPlansTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_14_233155_add_distance_to_running_plans_table.php',
+        'AddGeoLocationsToRunningPlanTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_16_192259_add_geo_locations_to_running_plan_table.php',
         'AddGroupIdToRunningPlansTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_12_210108_add_group_id_to_running_plans_table.php',
         'CreateAchievementTypesTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_04_114736_create_achievement_types_table.php',
         'CreateAchievementsTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_04_115435_create_achievements_table.php',
