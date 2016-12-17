@@ -62,3 +62,6 @@ Route::controllers([
 ]);
 
 Route::resource('running_plan', 'RunningPlanController');
+
+Route::get('diary','DiaryController@index');
+Route::post('diary','DiaryController@create');
