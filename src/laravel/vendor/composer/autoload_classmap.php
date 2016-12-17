@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AchievementTypesTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'AddDistanceToRunningPlansTable' => $baseDir . '/database/migrations/2016_12_14_233155_add_distance_to_running_plans_table.php',
+    'AddGeoLocationsToRunningPlanTable' => $baseDir . '/database/migrations/2016_12_16_192259_add_geo_locations_to_running_plan_table.php',
     'AddGroupIdToRunningPlansTable' => $baseDir . '/database/migrations/2016_12_12_210108_add_group_id_to_running_plans_table.php',
     'CreateAchievementTypesTable' => $baseDir . '/database/migrations/2016_12_04_114736_create_achievement_types_table.php',
     'CreateAchievementsTable' => $baseDir . '/database/migrations/2016_12_04_115435_create_achievements_table.php',

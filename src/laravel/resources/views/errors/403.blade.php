@@ -4,6 +4,6 @@
 
 @section('content')
 
-    <h1>Na prístup k tejto stránke sa najskôr musíte prihlásiť.</h1>
+    <h1>Na prístup k tejto stránke nemáte povolenie.</h1>
 
 @endsection

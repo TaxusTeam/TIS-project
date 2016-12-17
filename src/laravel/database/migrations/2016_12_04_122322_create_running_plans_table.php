@@ -26,6 +26,18 @@ class CreateRunningPlansTable extends Migration {
             $table->date('end');
             $table->longText('description');
             $table->string('name');
+
+            $table->integer('group_id')->unsigned();
+            $table->foreign("group_id")->references("id")->on("groups")->onDelete('cascade');
+
+            $table->string('distance_text');
+            $table->integer('distance_value')->unsigned();
+
+            $table->double('origin_lat');
+            $table->double('origin_lng');
+
+            $table->double('destination_lat');
+            $table->double('destination_lng');
 		});
 	}
 

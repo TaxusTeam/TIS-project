@@ -13,7 +13,7 @@
         <input id="address" type="textbox" value="vysoke tatry">
         <input id="submit" type="button" value="Geocode">
     </div>
-    <div id="map"></div>
+    <div id="gmap"></div>
     <script>
         function initMap() {
 
@@ -98,7 +98,7 @@
 
             var myLatlng = {lat: 48.1512219, lng: 17.0701161};
 
-            var map = new google.maps.Map(document.getElementById('map'), {
+            var map = new google.maps.Map(document.getElementById('gmap'), {
                 center: myLatlng,
                 zoom: 16,
             });
