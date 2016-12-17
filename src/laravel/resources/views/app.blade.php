@@ -64,9 +64,11 @@
 								<li><a href="{{ url('/rmtrainers') }}">remove Trainers</a></li>
 								<li><a href="{{ url('activate') }}">Activate User</a></li>
 								<li><a href="{{ url('deleteUser') }}">Delete User</a></li>
+							@else
+								<li><a href="{{ url('diary') }}">Zápisnik</a></li>
+							@endif
 
-						@endif
-						<li><a href="{{ url('zapisnik') }}">Zapisnik</a></li>
+						<li><a href="{{ url('zapisnik') }}">Bežecký denník</a></li>
 						@endif
 				</ul>
 
