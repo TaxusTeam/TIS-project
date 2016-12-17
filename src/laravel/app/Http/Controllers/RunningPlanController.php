@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RunningPlanController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -44,22 +49,35 @@ class RunningPlanController extends Controller {
 	public function store(Request $request)
 	{
 	    $trainerId = Auth::user()->id;
+        $origin = $request->get('origin');
+        $destination = $request->get('destination');
+        $start = date("Y-m-d H:i:s", strtotime($request->get('start')));
+        $end = date("Y-m-d H:i:s", strtotime($request->get('end')));
+        $description = $request->get('description');
+        $name = $request->get('name');
+        $group_id = $request->get('group_id');
+        $distance_text = $_COOKIE["totalDistanceText"];
+        $distance_value = $_COOKIE["totalDistanceValue"];
+        $origin_lat = $_COOKIE["geoLocationOriginLat"];
+        $origin_lng = $_COOKIE["geoLocationOriginLng"];
+        $destination_lat = $_COOKIE["geoLocationDestinationLat"];
+        $destination_lng = $_COOKIE["geoLocationDestinationLng"];
 
         $running_plan = RunningPlan::create([
             "owner_id" => $trainerId,
-            "origin" => $request->get('origin'),
-            "destination" => $request->get('destination'),
-            "start" => date("Y-m-d H:i:s", strtotime($request->get('start'))),
-            "end" => date("Y-m-d H:i:s", strtotime($request->get('end'))),
-            "description" => $request->get('description'),
-            "name" => $request->get('name'),
-            "group_id" => $request->get('group_id'),
-            "distance_text" => $_COOKIE["totalDistanceText"],
-            "distance_value" => $_COOKIE["totalDistanceValue"],
-            "origin_lat" => (float)$_COOKIE["geoLocationOriginLat"],
-            "origin_lng" => (float)$_COOKIE["geoLocationOriginLng"],
-            "destination_lat" => (float)$_COOKIE["geoLocationDestinationLat"],
-            "destination_lng" => (float)$_COOKIE["geoLocationDestinationLng"],
+            "origin" => $origin,
+            "destination" => $destination,
+            "start" => $start,
+            "end" => $end,
+            "description" => $description,
+            "name" => $name,
+            "group_id" => $group_id,
+            "distance_text" => $distance_text,
+            "distance_value" => $distance_value,
+            "origin_lat" => $origin_lat,
+            "origin_lng" => $origin_lng,
+            "destination_lat" => $destination_lat,
+            "destination_lng" => $destination_lng,
         ]);
 
 		return redirect()->route('running_plan.show', $running_plan->id);
