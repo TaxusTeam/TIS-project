@@ -1,12 +1,26 @@
 @extends('app')
-@section('title', 'DB save')
+@section('title', $title)
 
 
 @section('content')
 
-    {{ $runningPlan }}
-    {{ "show " . $timeAtomaticlalyAdjusted . "END show" }}
+    @if($check)
+        @if(Auth::user()->is_trainer)
+            trener
 
-    {{ dump($timeAtomaticlalyAdjusted) }}
+            {{ $runningPlan }}
+
+            @if($timeAtomaticlalyAdjusted)
+                <h1>Datum bol nastaveny si borec</h1>
+                {{ Session::put('timeAtomaticlalyAdjusted', false) }}
+            @endif
+        @else
+            bezec TODO check
+
+            {{ $runningPlan }}
+        @endif
+    @else
+        {{ /*abort(403)*/ view("errors/403") }}
+    @endif
 
 @endsection

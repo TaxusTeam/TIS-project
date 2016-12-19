@@ -26,28 +26,44 @@
 
                     <div class="row running-plans">
                         <div class="col-xs-12 running-plans__div--current rp-list">
-                            <h2>Aktuálne plány</h2>
+                            @if(Auth::user()->is_trainer)
+                                <h2>Aktuálne plány</h2>
+                            @else
+                                <h2>Moje plány</h2>
+                            @endif
 
                             @forelse($runningPlansCurrent as $runningPlan)
                                 @include('running_plans.running_plan_box')
                             @empty
                                 <div class="row rp-box">
                                     <div class="col-xs-12">
-                                        Momentálne neprebiehajú žiadne plány.
+                                        @if(Auth::user()->is_trainer)
+                                            Momentálne neprebiehajú žiadne plány.
+                                        @else
+                                            Nie ste prihlásený do žiadneho plánu.
+                                        @endif
                                     </div>
                                 </div>
                             @endforelse
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-sm-push-6 running-plans__div--future rp-list">
-                            <h2>Budúce plány</h2>
+                            @if(Auth::user()->is_trainer)
+                                <h2>Budúce plány</h2>
+                            @else
+                                <h2>Aktuálne plány</h2>
+                            @endif
 
                             @forelse($runningPlansFuture as $runningPlan)
                                 @include('running_plans.running_plan_box')
                             @empty
                                 <div class="row rp-box">
                                     <div class="col-xs-12">
-                                        Nemáte žiadne budúce plány.
+                                        @if(Auth::user()->is_trainer)
+                                            Nemáte žiadne budúce plány.
+                                        @else
+                                            Nie sú vypísané žiadne plány, do ktorých by ste sa mohli prihlásiť.
+                                        @endif
                                     </div>
                                 </div>
                             @endforelse

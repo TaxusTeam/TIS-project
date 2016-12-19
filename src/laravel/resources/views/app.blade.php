@@ -48,7 +48,6 @@
 										<li><a href="{{ url('editGroup') }}">edit Group</a></li>
 										<li><a href="{{ url('deleteGroup') }}">delete Group</a></li>
 									</ul>
-
 								</li>
 
 								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Running plans<span class="caret"></span></a>
@@ -56,7 +55,6 @@
 										<li><a href="{{ route('running_plan.create') }}">create new Running plan</a></li>
 										<li><a href="{{ route('running_plan.index') }}">list my Running plans</a></li>
 									</ul>
-
 								</li>
 
 							@elseif(Auth::user()->is_admin)
@@ -65,6 +63,12 @@
 								<li><a href="{{ url('activate') }}">Activate User</a></li>
 								<li><a href="{{ url('deleteUser') }}">Delete User</a></li>
 							@else
+								<li class="dropdown"><a href="{{ url('#') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;">Running plans<span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="{{ route('running_plan.index') }}">list my Running plans</a></li>
+									</ul>
+								</li>
+
 								<li><a href="{{ url('diary') }}">Zápisnik</a></li>
 							@endif
 
