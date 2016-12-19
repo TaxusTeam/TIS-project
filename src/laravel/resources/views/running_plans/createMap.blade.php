@@ -1,5 +1,5 @@
 <?php
-$GMAP_API_KEY = "AIzaSyDo5pBIiXi0VjW3c07_VtZ8-ecc9GABLEk";
+$GMAP_API_KEY = "AIzaSyB3rIhgEx90wqPIo7LzAkloA4YK8GxwJHQ";
 ?>
 
 <input class="col-xs-12 col-sm-8" id="gmap--address" type="textbox" value="vysoke tatry" placeholder="Hľadaj na mape">
