@@ -5,5 +5,8 @@
 @section('content')
 
     {{ $runningPlan }}
+    {{ "show " . $timeAtomaticlalyAdjusted . "END show" }}
+
+    {{ dump($timeAtomaticlalyAdjusted) }}
 
 @endsection
