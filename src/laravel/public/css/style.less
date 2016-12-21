@@ -5,6 +5,21 @@
     font-weight: bold;
   }
 
+  &.form--detail {
+    label {
+      font-weight: normal;
+    }
+
+    input {
+      font-weight: bold;
+
+      &:disabled {
+        background-color: #FFFFCC;
+        border: 1px solid #FFCC66;
+      }
+    }
+  }
+
   input, select, textarea {
     margin-bottom: 15px;
   }
@@ -44,6 +59,13 @@
     margin-bottom: 15px;
   }
 
+  &.map--show {
+    #map {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
   #gmap--distance {
     font-size: 18px;
     text-align: center;
@@ -75,6 +97,7 @@
 @running_plan--future: #0099FF;
 
 @rp-gray: #E6E6E6;
+@rp-gray-dark: #DADADA;
 
 .running-plans {
   padding: 25px;
@@ -111,6 +134,38 @@
   }
 }
 
+.running-plans__div--detail {
+  font-size: 16px;
+
+  .rp-box__row--header {
+    font-size: 24px;
+
+    &.theme_current {
+      background-color: @running_plan--currnet;
+    }
+
+    &.theme_old {
+      background-color: @running_plan--old;
+    }
+
+    &.theme_future {
+      background-color: @running_plan--future;
+    }
+  }
+
+  .rp-box__row--description {
+    border-left: none;
+    border-right: none;
+
+    padding-top: 25px;
+    padding-left: 25px;
+  }
+
+  .rp-box__row--group {
+    background: @rp-gray-dark;
+  }
+}
+
 .rp-box__row--header {
   padding: 10px 15px;
   font-weight: bold;
@@ -132,6 +187,11 @@
   padding: 15px 13px;
 }
 
+.rp-box__detail--wrapper{
+  border-left: 2px solid @rp-gray-dark;
+  border-right: 2px solid @rp-gray-dark;
+}
+
 .rp-box__row--group {
   background: @rp-gray;
   padding: 5px 15px;
@@ -151,6 +211,18 @@
   h2 {
     margin: 0;
     text-align: center;
+  }
+}
+
+.rp__h2--date-error {
+  color: @running_plan--old;
+}
+
+.wrapper--check-box {
+
+  input[type="checkbox"] {
+    margin-left: 25px;
+    margin-bottom: 25px;
   }
 }
 

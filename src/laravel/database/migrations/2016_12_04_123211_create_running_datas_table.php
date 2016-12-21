@@ -24,7 +24,7 @@ class CreateRunningDatasTable extends Migration {
             $table->foreign("user_running_plan_id")->references("id")->on("user_running_plan")->onDelete('cascade');
             $table->date('date');
             $table->integer('mood');
-            $table->float('distance');
+            $table->integer('distance')->unsigned(); // do DB v m
 		});
 	}
 

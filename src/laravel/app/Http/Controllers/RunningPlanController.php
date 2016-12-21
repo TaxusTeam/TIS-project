@@ -191,6 +191,18 @@ class RunningPlanController extends Controller {
 	{
         $userId = Auth::user()->id;
 	    $runningPlan = RunningPlan::query()->findOrFail($id);
+        $groups = Group::orderBy('name')->lists('name', 'id');
+
+        $now = date("Y-m-d H:i:s");
+
+        if ($runningPlan->end > $now && $runningPlan->start <= $now) {
+            $theme_background = "theme_current";
+        } elseif ($runningPlan->end <= $now) {
+            $theme_background = "theme_old";
+        } elseif ($runningPlan->start > $now) {
+            $theme_background = "theme_future";
+        }
+
         $timeAtomaticlalyAdjusted = Session::has('timeAtomaticlalyAdjusted') ? Session::get('timeAtomaticlalyAdjusted') : false;
 
         if (Auth::user()->is_trainer) {
@@ -201,6 +213,7 @@ class RunningPlanController extends Controller {
         }
         else{
 //            todo bezec
+            $check = true;
         }
 
         if (!$check) {
@@ -210,6 +223,8 @@ class RunningPlanController extends Controller {
         return view('running_plans.show')
             ->with('title', 'Môj bežecký plán')
             ->with('runningPlan', $runningPlan)
+            ->with('groups', $groups)
+            ->with('theme_background', $theme_background)
             ->with('timeAtomaticlalyAdjusted', $timeAtomaticlalyAdjusted);
 	}
 
@@ -243,7 +258,10 @@ class RunningPlanController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        $runningPlan = RunningPlan::query()->findOrFail($id);
+        $runningPlan->delete();
+
+        return redirect()->route('running_plan.index');
 	}
 
 }
