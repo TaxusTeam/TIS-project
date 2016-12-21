@@ -18,16 +18,27 @@ class TrainersController extends Controller {
     }
 
     public  function  index(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
+
         $names = User::all();
         return view("addtrainers", compact('names'));
     }
 
     public  function  indexRemove(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
+
         $names = User::all();
         return view("rmtrainers", compact('names'));
     }
 
     public  function  update_to_trainer(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
 
         $data = Input::get('agree');
 
@@ -41,6 +52,9 @@ class TrainersController extends Controller {
     }
 
     public  function  remove_trainer(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
 
         $data = Input::get('disagree');
 

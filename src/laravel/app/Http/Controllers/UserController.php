@@ -14,15 +14,24 @@ class UserController extends Controller {
 
     public function __construct()
     {
+
         $this->middleware('auth');
+
     }
 
     public  function  getInactive(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
+
         $names = User::all();
         return view("activate_user", compact('names'));
     }
 
     public  function  activateUser(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
 
         $data = Input::get('agree');
 
@@ -36,11 +45,18 @@ class UserController extends Controller {
     }
 
     public  function  getAll(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
+
         $names = User::all();
         return view("delete_user", compact('names'));
     }
 
     public  function  deleteUser(){
+        if (Auth::user()->is_admin != true){
+            return view("forbidden");
+        }
 
         $data = Input::get('agree');
 

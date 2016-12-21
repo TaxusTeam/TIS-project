@@ -98,13 +98,17 @@ trait AuthenticatesAndRegistersUsers {
 		$email = $request->get('email');
 
 		$user2 = User::where('email',$email)->first();
-		//print("tESTUJEM USERA V LOGIN: ".$user2);
-		if ($user2->is_active == 0){
-			print("Your account isn`t activated!");
-			//return redirect()->intended('home');
-			return view('notActive');
-		}
+
+        if ($user2 != null) {
+            //print("tESTUJEM USERA V LOGIN: ".$user2);
+            if ($user2->is_active == 0) {
+                print("Your account isn`t activated!");
+                //return redirect()->intended('home');
+                return view('notActive');
+            }
+        }
 		//----------------koniec overenia-----------------------
+
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
 			return redirect()->intended($this->redirectPath());
@@ -124,7 +128,7 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	protected function getFailedLoginMessage()
 	{
-		return 'These credentials do not match our records.';
+		return 'Uistite sa ze ste e-mail alebo heslo vyplnili spravne';
 	}
 
 	/**
