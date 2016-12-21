@@ -114,7 +114,11 @@ class RunningPlanController extends Controller {
 	 */
 	public function create()
 	{
-        $trainerId = Auth::user()->id;
+        if (Auth::user()->is_trainer != 1) {
+            return view("errors/403");
+        }
+
+	    $trainerId = Auth::user()->id;
         $groups = Group::where('trainer_id', $trainerId)->orderBy('name')->lists('name', 'id');
 
 		return view('running_plans.create')
@@ -199,9 +203,12 @@ class RunningPlanController extends Controller {
 //            todo bezec
         }
 
+        if (!$check) {
+            return view("errors/403");
+        }
+
         return view('running_plans.show')
             ->with('title', 'Môj bežecký plán')
-            ->with('check', $check)
             ->with('runningPlan', $runningPlan)
             ->with('timeAtomaticlalyAdjusted', $timeAtomaticlalyAdjusted);
 	}

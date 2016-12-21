@@ -4,23 +4,19 @@
 
 @section('content')
 
-    @if($check)
-        @if(Auth::user()->is_trainer)
-            trener
+    @if(Auth::user()->is_trainer)
+        trener
 
-            {{ $runningPlan }}
+        {{ $runningPlan }}
 
-            @if($timeAtomaticlalyAdjusted)
-                <h1>Datum bol nastaveny si borec</h1>
-                {{ Session::put('timeAtomaticlalyAdjusted', false) }}
-            @endif
-        @else
-            bezec TODO check
-
-            {{ $runningPlan }}
+        @if($timeAtomaticlalyAdjusted)
+            <h1>Datum bol nastaveny si borec</h1>
+            {{ Session::put('timeAtomaticlalyAdjusted', false) }}
         @endif
     @else
-        {{ /*abort(403)*/ view("errors/403") }}
+        bezec TODO check
+
+        {{ $runningPlan }}
     @endif
 
 @endsection
