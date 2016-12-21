@@ -33,7 +33,7 @@
 						{!! Form::label('moodLabel', 'Ako sa ti behalo? ') !!}
 						{!! Form::select('mood', array(1 => 'Výborne', 2 => 'Dobre', 3 => 'Nič moc', 4 => 'Zle')) !!}<br>
 						<br>
-						{!!  Form::submit('Create', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
+						{!!  Form::submit('Zapis', array('class' => 'pull-left btn btn-sm btn-primary')) !!}
 						{!!  Form::close() !!}
 					
 				</div>
