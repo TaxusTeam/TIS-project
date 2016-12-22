@@ -104,8 +104,8 @@
                                 <div class="row">
 
                                     <div class="col-xs-12 wrapper--check-box">
-                                        {!! Form::label('check', 'Nenávratne vymazať plán:', []) !!}
-                                        {!! Form::checkbox('check', null, false, []) !!}
+                                        {!! Form::label('check', 'Nenávratne vymazať plán:', ['class' => 'label--delete']) !!}
+                                        {!! Form::checkbox('check', null, false, ['class' => 'label--delete']) !!}
                                     </div>
 
                                     {!!  Form::submit('Vymazať plán', [
