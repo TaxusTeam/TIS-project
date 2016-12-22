@@ -195,14 +195,6 @@ class RunningPlanController extends Controller {
 
         $now = date("Y-m-d H:i:s");
 
-        if ($runningPlan->end > $now && $runningPlan->start <= $now) {
-            $theme_background = "theme_current";
-        } elseif ($runningPlan->end <= $now) {
-            $theme_background = "theme_old";
-        } elseif ($runningPlan->start > $now) {
-            $theme_background = "theme_future";
-        }
-
         $timeAtomaticlalyAdjusted = Session::has('timeAtomaticlalyAdjusted') ? Session::get('timeAtomaticlalyAdjusted') : false;
 
         if (Auth::user()->is_trainer) {
@@ -210,10 +202,42 @@ class RunningPlanController extends Controller {
                 ->where('id', $id)
                 ->get()
                 ->count() > 0;
+
+            if ($runningPlan->end > $now && $runningPlan->start <= $now) {
+                $theme_background = "theme_current";
+            } elseif ($runningPlan->end <= $now) {
+                $theme_background = "theme_old";
+            } elseif ($runningPlan->start > $now) {
+                $theme_background = "theme_future";
+            }
         }
-        else{
-//            todo bezec
-            $check = true;
+        else {
+            $rp_my_old_current = DB::table('user_running_plans')
+                ->join('running_plans', 'user_running_plans.running_plan_id', '=', 'running_plans.id')
+                ->where('user_running_plans.user_id', $userId)
+                ->where('running_plans.id', $id)
+                ->where('running_plans.start', '<=', $now)
+                ->get();
+
+            $myGroupId = Auth::user()->group_id;
+
+            $rp_other_current = RunningPlan::where('group_id', $myGroupId)
+                ->where('id', $id)
+                ->where('end', '>', $now)
+                ->where('start', '<=', $now)
+                ->get();
+
+            $check = !empty($rp_my_old_current) || $rp_other_current->count() > 0;
+
+            if (!empty($rp_my_old_current)) {
+                if ($runningPlan->end > $now && $runningPlan->start <= $now) {
+                    $theme_background = "theme_current";
+                } elseif ($runningPlan->end <= $now) {
+                    $theme_background = "theme_old";
+                }
+            } elseif ($rp_other_current->count() > 0) {
+                $theme_background = "theme_future";
+            }
         }
 
         if (!$check) {
