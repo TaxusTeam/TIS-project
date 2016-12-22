@@ -19,11 +19,12 @@ class CreateUserRunningPlansTable extends Migration {
 
             //$table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign("user_id")->references("id")->on("users");
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->integer('running_plan_id')->unsigned();
-            $table->foreign("running_plan_id")->references("plan_id")->on("running_plan");
+            $table->foreign("running_plan_id")->references("plan_id")->on("running_plan")->onDelete('cascade');
             $table->dateTime('start');
             $table->dateTime('finish');
+            $table->integer('total_distance')->unsigned();
 		});
 	}
 
