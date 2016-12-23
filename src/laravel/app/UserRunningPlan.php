@@ -6,7 +6,7 @@ class UserRunningPlan extends Model {
 
     protected $table = 'user_running_plans';
 
-    protected $fillable = ['user_id', 'running_plan_id', 'start', 'finnish', 'total_distance'];
+    protected $fillable = ['user_id', 'running_plan_id', 'start', 'finish', 'total_distance'];
 
 
 }

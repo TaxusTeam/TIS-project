@@ -117,6 +117,45 @@
                                 {!!  Form::close() !!}
 
                             </div>
+                        @elseif($theme_background != "theme_old")
+                            <div class="col-xs-12">
+                                @if($theme_background == "theme_future")
+
+                                    {!!  Form::open(['url' => 'user_running_plan', 'method' => 'post','class' => 'form--label-bold']) !!}
+
+                                @elseif($theme_background == "theme_current")
+
+                                    {!!  Form::open(['route' => ['user_running_plan.destroy', $runningPlan->id], 'method' => 'delete','class' => 'form--label-bold']) !!}
+
+                                @endif
+
+
+
+                                <div class="row">
+
+                                    {!! Form::hidden('running_plan_id', $runningPlan->id) !!}
+
+                                    @if($theme_background == "theme_future")
+
+                                        {!!  Form::submit('Prihlásiť sa na plán', [
+                                            "class" => "col-xs-12 rp__button--sign-in"
+                                        ]) !!}
+
+                                    @elseif($theme_background == "theme_current")
+
+                                        {!!  Form::submit('Odhlásiť sa z plánu', [
+                                            "class" => "col-xs-12 rp__button--sign-out"
+                                        ]) !!}
+
+                                    @endif
+
+
+
+                                </div>
+
+                                {!!  Form::close() !!}
+
+                            </div>
                         @endif
                     </div>
                 </div>

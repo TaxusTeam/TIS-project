@@ -65,3 +65,7 @@ Route::resource('running_plan', 'RunningPlanController');
 
 Route::get('diary','DiaryController@index');
 Route::post('diary','DiaryController@create');
+
+Route::resource('user_running_plan', 'UserRunningPlanController', ['only' => [
+    'store', 'destroy'
+]]);

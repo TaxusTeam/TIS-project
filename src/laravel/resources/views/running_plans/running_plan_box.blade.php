@@ -24,7 +24,7 @@
         $(".js__rp-box--{{ $runningPlan->id }}").hover(function () {
             $(this).find(".rp-box__row--description").show(500);
         }, function () {
-            $(this).find(".rp-box__row--description").hide(500);
+//            $(this).find(".rp-box__row--description").hide(500);
         });
     });
 </script>

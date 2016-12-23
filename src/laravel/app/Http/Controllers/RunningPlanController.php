@@ -282,7 +282,11 @@ class RunningPlanController extends Controller {
 	 */
 	public function destroy($id)
 	{
-        $runningPlan = RunningPlan::query()->findOrFail($id);
+        DB::table('user_running_plans')
+            ->where('running_plan_id', $id)
+            ->delete();
+
+	    $runningPlan = RunningPlan::query()->findOrFail($id);
         $runningPlan->delete();
 
         return redirect()->route('running_plan.index');
