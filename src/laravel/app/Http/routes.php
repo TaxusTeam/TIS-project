@@ -14,7 +14,6 @@
 //Route::get('/', 'WelcomeController@index');
 
 Route::get('/', 'PostController@index');
-Route::get('zapisnik','ZapisnikController@index');
 
 Route::get('profil','ProfilController@index');
 Route::post('profil','ProfilController@update_avatar');

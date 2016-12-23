@@ -72,7 +72,6 @@
 								<li><a href="{{ url('diary') }}">Zápisnik</a></li>
 							@endif
 
-						<li><a href="{{ url('zapisnik') }}">Bežecký denník</a></li>
 						@endif
 				</ul>
 
@@ -106,8 +105,6 @@
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	@yield('content')
-
-	@yield('map')
 </body>
 <footer>
 	<p>TEAM FSPH, FMFI UK &copy;2016<br> TIS projekt </p>
