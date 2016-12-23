@@ -244,9 +244,21 @@ class RunningPlanController extends Controller {
             return view("errors/403");
         }
 
+        $runners = DB::table('user_running_plans')
+            ->join('users', 'user_running_plans.user_id', '=', 'users.id')
+            ->join('running_plans', 'running_plans.id', '=', 'user_running_plans.running_plan_id')
+            ->where('user_running_plans.running_plan_id', $id)
+            ->orderBy('user_running_plans.total_distance', 'desc')
+            ->get([
+                'user_running_plans.*',
+                'users.name AS users___name',
+                DB::raw('user_running_plans.total_distance >= running_plans.distance_value AS runner___is_winner'),
+            ]);
+
         return view('running_plans.show')
             ->with('title', 'Môj bežecký plán')
             ->with('runningPlan', $runningPlan)
+            ->with('runners', $runners)
             ->with('groups', $groups)
             ->with('theme_background', $theme_background)
             ->with('timeAtomaticlalyAdjusted', $timeAtomaticlalyAdjusted);
@@ -260,7 +272,7 @@ class RunningPlanController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        return view("errors/403");
 	}
 
 	/**
@@ -271,7 +283,7 @@ class RunningPlanController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		return view("errors/403");
 	}
 
 	/**

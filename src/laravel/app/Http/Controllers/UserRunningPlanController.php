@@ -77,7 +77,8 @@ class UserRunningPlanController extends Controller {
 
 
 
-        $userRunningPlan = UserRunningPlan::where('running_plan_id', $id);
+        $userRunningPlan = UserRunningPlan::where('running_plan_id', $id)
+            ->where('user_id', $userId);
         $userRunningPlan->delete();
 
         return redirect()->route('running_plan.show', $id);

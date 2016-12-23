@@ -97,6 +97,20 @@
 
                         </div>
 
+                        <div class="col-xs-12 runners">
+                            <h2 class="h2">Prihlásení bežci</h2>
+
+                            @forelse($runners as $runner)
+                                @include('running_plans.runner_info_box')
+                            @empty
+                                <div class="row rp-box">
+                                    <div class="col-xs-12">
+                                        Zatiaľ sa neprihlásil žiaden bežec.
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+
                         @if(Auth::user()->is_trainer)
                             <div class="col-xs-12">
                                 {!!  Form::open(['route' => ['running_plan.destroy', $runningPlan->id], 'method' => 'delete','class' => 'form--label-bold']) !!}
@@ -157,6 +171,7 @@
 
                             </div>
                         @endif
+
                     </div>
                 </div>
             </div>
