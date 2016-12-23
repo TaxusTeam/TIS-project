@@ -1,0 +1,11 @@
+Datum: 26.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): streda 13:00
+
+Pripomienky cviciaceho:
+	Zmenit diagramy z JPEG do PNG
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- Opravili sme diagramy.
+	- Spravili sme datovy model.
+	- Spravili sme analyzu technologii.

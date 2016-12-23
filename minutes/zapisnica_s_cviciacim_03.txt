@@ -1,0 +1,11 @@
+Datum: 19.10.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Stretnutie s cviciacim(Peter Gergel): streda 13:00
+
+Pripomienky cviciaceho:
+	Upravit ERD a sekvencny diagram.
+
+Na stretnuti s cviciacim sme prediskutovali doterajsi progres:
+	- Spravili sme diagramy.
+	- Upravili sme specifikaciu podla poziadaviek zadavatela.
+	- Zacali sme pripravovat CSS pre testovacie ucely.

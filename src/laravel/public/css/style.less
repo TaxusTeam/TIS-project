@@ -1,0 +1,306 @@
+.form--label-bold {
+  padding: 10px;
+
+  label {
+    font-weight: bold;
+  }
+
+  &.form--detail {
+    label {
+      font-weight: normal;
+    }
+
+    input {
+      font-weight: bold;
+
+      &:disabled {
+        background-color: #FFFFCC;
+        border: 1px solid #FFCC66;
+      }
+    }
+  }
+
+  input, select, textarea {
+    margin-bottom: 15px;
+  }
+
+  select {
+    padding: 5px 10px;
+    width: 100%;
+  }
+
+  input[type="submit"] {
+    opacity: 1;
+    transition: opacity 1s;
+    padding: 5px 10px;
+    font-weight: bold;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+.div--no-padding{
+  padding: 0;
+}
+
+.div--vertical-space {
+  margin-bottom: 40px;
+}
+
+/*map begin*/
+
+.div--map {
+  #map {
+    width: 100%;
+    height: 500px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+  }
+
+  &.map--show {
+    #map {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  #gmap--distance {
+    font-size: 18px;
+    text-align: center;
+    line-height: 35px;
+  }
+
+  input {
+    padding: 5px 10px;
+  }
+
+  .gmap--instructions {
+    font-size: 16px;
+    margin: 10px 0;
+
+    &:first-of-type {
+      margin-top: 95px;
+    }
+  }
+}
+
+/*map end*/
+
+
+
+/*running plan begin*/
+
+@running_plan--currnet: #5CB85C;
+@running_plan--old: #C4173C;
+@running_plan--future: #0099FF;
+
+@rp-gray: #E6E6E6;
+@rp-gray-dark: #DADADA;
+
+.running-plans {
+  padding: 25px;
+
+  a {
+    color: black;
+  }
+}
+
+.running-plans__div--current {
+  font-size: 16px;
+
+  .rp-box__row--header {
+    background-color: @running_plan--currnet;
+    font-size: 20px;
+  }
+}
+
+.running-plans__div--old {
+  font-size: 14px;
+
+  .rp-box__row--header {
+    background-color: @running_plan--old;
+    font-size: 16px;
+  }
+}
+
+.running-plans__div--future {
+  font-size: 14px;
+
+  .rp-box__row--header {
+    background-color: @running_plan--future;
+    font-size: 16px;
+  }
+}
+
+.runners {
+  font-size: 16px;
+
+  .rp-box__row--header {
+    font-size: 20px;
+  }
+
+  .runners__header--gold {
+    background-color: #FFBD0F;
+    color: white;
+  }
+
+  .runners__header--standard{
+    background-color: @rp-gray-dark;
+    color: black;
+  }
+
+  .rp-box__row--description {
+    border-bottom: 2px solid @rp-gray;
+  }
+}
+
+.runner__description--text {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.runner__description--img {
+  float: right;
+  width: 55px;
+  height: 55px;
+}
+
+.running-plans__div--detail {
+  font-size: 16px;
+
+  .rp-box__row--header {
+    font-size: 24px;
+
+    &.theme_current {
+      background-color: @running_plan--currnet;
+    }
+
+    &.theme_old {
+      background-color: @running_plan--old;
+    }
+
+    &.theme_future {
+      background-color: @running_plan--future;
+    }
+  }
+
+  .rp-box__row--description {
+    border-left: none;
+    border-right: none;
+
+    padding-top: 25px;
+    padding-left: 25px;
+  }
+
+  .rp-box__row--group {
+    background-color: @rp-gray-dark;
+  }
+}
+
+.rp-box__row--header {
+  padding: 10px 15px;
+  font-weight: bold;
+
+  color: white;
+}
+
+.rp-box__header--name {
+  float: left;
+}
+
+.rp-box__header--distance_text {
+  float: right;
+}
+
+.rp-box__row--description {
+  border-left: 2px solid @rp-gray;
+  border-right: 2px solid @rp-gray;
+  padding: 15px 13px;
+}
+
+.rp-box__detail--wrapper{
+  border-left: 2px solid @rp-gray-dark;
+  border-right: 2px solid @rp-gray-dark;
+}
+
+.rp-box__row--group {
+  background: @rp-gray;
+  padding: 5px 15px;
+}
+
+.rp-box__span--group {
+  font-weight: bold;
+}
+
+.rp-box {
+  margin: 25px 10px;
+}
+
+.rp-list {
+  margin-bottom: 75px;
+
+  h2 {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.rp__h2--date-error {
+  color: @running_plan--old;
+}
+
+.wrapper--check-box {
+
+  input[type="checkbox"] {
+    margin-left: 25px;
+    margin-bottom: 25px;
+  }
+}
+
+.label--delete {
+  font-size: 16px;
+  font-weight: normal !important;
+  margin-top: 40px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.rp__button--sign-in,
+.rp__button--sign-out {
+  border: none;
+  color: white;
+  font-size: 18px;
+  line-height: 35px;
+  margin-top: 75px;
+}
+
+.rp__button--sign-in {
+  background-color: @running_plan--currnet;
+}
+
+.rp__button--sign-out {
+  background-color: @running_plan--future;
+}
+
+.runners {
+  .h2 {
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+
+    margin-bottom: 65px;
+  }
+}
+
+.rp-box--runner {
+  margin-bottom: 35px;
+  cursor: pointer;
+}
+
+
+
+/*running plan end*/

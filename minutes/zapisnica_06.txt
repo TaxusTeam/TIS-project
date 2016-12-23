@@ -1,0 +1,14 @@
+Datum: 10.11.2016
+Pritomny: Jaroslav Fuska(manazment prace), Martin Heinz(dokumentacia), Michal Puskel(implementacia), Tomas Slama(manazment komunikacie)
+Timove stretnutie: stvrtok 11:30
+
+Zhodnotenie predchadzajuceho tyzdna:
+	Opravili sme datovy model.
+	Spravili sme triedny diagram.
+	Spravili sme dekompoziciu.
+    Pripravili sme testovacie scenare.
+
+Ciele na tento tyzden:
+	- Urobit login pre aplikaciu,
+	- Vytvorit databazu,
+	- Spravit jednoduchy layout interface-u(CSS, BootStrap)
